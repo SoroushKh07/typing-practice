@@ -35,7 +35,7 @@
     url("assets/fonts/iosevka-italic.subset.woff") format("woff");
 }
 
-/*
+
 @font-face {
   font-family: "Iosevka";
   font-display: block;
@@ -45,7 +45,7 @@
   src: url("assets/fonts/iosevka-bolditalic.subset.woff2") format("woff2"),
     url("assets/fonts/iosevka-bolditalic.subset.woff") format("woff");
 }
-*/
+
 
 html {
   font-family: "Iosevka", monospace;
