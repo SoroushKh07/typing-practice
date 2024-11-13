@@ -9,6 +9,12 @@ const RIGHT_HAND = "jkl;uiopm,./nhy"
 const LETTERS_UPPER = LETTERS_LOWER.toUpperCase();
 const DIGITS = "0123456789";
 const PUNCTUATION = "!@#$%^&*()_+-=[]{};':\",./<>?";
+const LESSONS = new Map([
+  ["Lesson 1", ["f j", "ff jj", "fj fj jf jf"]],
+  ["Lesson 2", ["d k", "dd kk", "dk dk kd kd"]]
+]) 
+var lessonNum = 1;//this will be changed based on which lesson you click on
+var lessonPhase = 0;//changes as lesson progresses
 
 class TypingPractice {
   constructor(root) {
@@ -124,9 +130,9 @@ class TypingPractice {
 
   _initBuffers() {
     const words = [];
-    while (words.join(" ").length < this.bufferSize * 5) {
+    // while (words.join(" ").length < this.bufferSize * 5) {
       words.push(this._makeRandomWord());
-    }
+    // }
     this.given = words.join(" ");
     this.typed = "";
   }
@@ -174,7 +180,7 @@ class TypingPractice {
     const s = this.weights;
     
     return (
-      "f"
+      LESSONS.get(`Lesson ${lessonNum}`)[lessonPhase]
       // LETTERS_LOWER.repeat(s.lettersLower) +
       // LETTERS_UPPER.repeat(s.lettersUpper) +
       // DIGITS.repeat(s.digits) +
@@ -183,11 +189,12 @@ class TypingPractice {
   }
 
   _makeRandomWord() {
-    let length = Math.floor(Math.random() * this.maxWordLength + 1);
-    length = 1000000;
+    // let length = Math.floor(Math.random() * this.maxWordLength + 1);
+    let length = 1000000;
     const charset = this._makeCharset();
     //return [...new Array(length)].map(() => randomChoice(charset)).join("");
-    return [...new Array(length)].map(() => "ROY" + "                                                                   ");
+    // return [...new Array(length)].map(() => charset + "                                                                   ");
+    return charset;
   }
 
   _resetCells() {
@@ -260,8 +267,13 @@ class TypingPractice {
       else if (given[i] == c){
         corrects++;
       }
-      if(corrects == 5){
-        console.log("test");
+      if(corrects == LESSONS.get(`Lesson ${lessonNum}`)[lessonPhase].length){
+        lessonPhase++;
+        console.log(lessonPhase);
+        corrects = 0;
+        this._resetCells();
+        this._initBuffers();
+        this.render();
       }
     });
 
@@ -283,10 +295,10 @@ class TypingPractice {
   advance(char) {
     this.typed += char;
     this.totalCharsTyped++;
-    const bs = this.bufferSize;
-    if (this.given.length < this.typed.length + Math.floor(bs / 2)) {
-      this.given += " " + this._makeRandomWord();
-    }
+    // const bs = this.bufferSize;
+    // if (this.given.length < this.typed.length + Math.floor(bs / 2)) {
+    //   this.given += " " + this._makeRandomWord();
+    // }
     this.render();
   }
 
