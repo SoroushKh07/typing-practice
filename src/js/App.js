@@ -472,14 +472,17 @@ const keys = ['`', '1', '2', '3', '4', '5','6','7', '8', '9',  '0', '-', '=', 'B
 var soundBase = ['Grave', 'One', 'Two', 'Three', 'Four', 'Five','Six','Seven', 'Eight', 'Nine',  'Zero', 'Hyphen', 'Equal', 'Backspace', 'q', 'w', 'e', 'r', 't', 'y', 'u', 'i', 'o', 'p', 'Open Bracket', 'Close Bracket', 'Pipe', 'a', 's', 'd', 'f', 'g', 'h', 'j', 'k', 'l', 'Semicolon', "Single Quote", 'Double  Quote', 'z', 'x', 'c', 'v', 'b', 'n', 'm', 'Comma', 'Dot', 'Slash', 'Asterisk', 'Addition', 'Exclamation', 'At', 'Pound', 'Dollar Sign', 'Percent', 'Carat', 'And', 'Left Bracket', 'Right Bracket', 'Underscore', 'Open Brace', 'Close Brace', 'Backslash', 'Colon', 'Less Than', 'Greater Than', 'Question Mark', 'Tilde', 'Spacebar', 'Q', 'W', 'E', 'R', 'T', 'Y', 'U','I','O', 'P', 'A', 'S', 'D', 'F', 'G', 'G', 'H', 'J', 'K', 'L', 'Z', 'X', 'C', 'V', 'B', 'N', 'M']
 if ('speechSynthesis' in window) {
 
-    TypedInput.addEventListener('keyup', e =>{
+    TypedInput.addEventListener('keydown', e =>{
       const speech = new SpeechSynthesisUtterance(soundBase[keys.indexOf(e.key)]);
-      console.log(soundBase[keys.indexOf(e.key)])
-      if (speech!='undefined'){
+      speech.rate = 1.2
+      if (soundBase[keys.indexOf(e.key)]!='undefined'){
+        if (window.speechSynthesis.speaking) {
+          window.speechSynthesis.cancel();
+        }
+        
         speech.lang = "en-US";
         window.speechSynthesis.speak(speech);
       }
-      
     })
     // Speech Synthesis supported 🎉
 }else{
