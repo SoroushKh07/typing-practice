@@ -1,0 +1,62 @@
+/* Fixed navbar */
+ul {
+    position: fixed;
+    left: 0;
+    margin-top: 0;
+    width: 100%;
+    list-style: none;
+    background-color: #16325B;
+    z-index: 999;
+}
+ul li {
+    /* Horizontal */
+    display: inline-block;
+    position: relative;
+}
+ul li a {
+    display: block;
+    padding: 5px 23px;
+    color: #FFFFFF;
+    text-decoration: none;
+    text-align: left;
+    font-size: 18px;
+    font-family: "Noto Sans", sans-serif;
+}
+/* Aligns account icon to right */
+.topnav-right {
+    float: right;
+    margin-right: 80px;
+}
+
+/* Account dropdown */
+ul li ul.dropdown li {
+    display: block;
+}
+ul li ul.dropdown {
+    right: 0;
+    left: auto;
+    background-color: #16325B;
+    position: absolute;
+    z-index: 99999;
+    display: none;
+}
+
+/* When a navbar element is hovered over, the cursor becomes a pointer */
+ul li a:hover {
+    cursor: pointer;
+    background-color: #1c437c;
+}
+/* When the account dropdown is hovered over, it gets darker and drops down */
+ul li:hover ul.dropdown {
+    display: block;
+    padding-left: 10px;
+    padding-right: 15px;
+    padding-bottom: 10px;
+    padding-top: 10px;
+    width: 130%;
+    z-index: 99999;
+}
+/* When you're active on a page, the navbar changes colour */
+.active {
+    border-bottom: 8px solid #FFFFFF;
+}
