@@ -1,55 +1,26 @@
-*{
-    margin: 0;
-    padding: 0;
-    box-sizing: border-box
+body {
+    background-color: #FBFBFF;
 }
 
-html {
-    font-family: 'Montserrat';
-    font-size: 20px;
+head, h1 {
+    text-align: center;
 }
 
-section {
-    min-height: 100vh;
-    width: 100%;
+.buttonArea {
     display: flex;
-    background-color: rgb(37, 37, 37);
-    flex-direction: column;
-    padding: 50px 0;
+    width: auto;
+    height: auto;
+    margin: auto;
 }
-
-section h1 {
-    color: rgba(255, 255, 255, 0.322);
-    text-align: center;
-    width: 100%;
-    font-size: 50px;
-    margin-bottom: 10px;
-}
-
-section p{
-    text-align: center;
-    color: rgba(255, 255, 255, 0.322);
-    width: 100%;
-    margin-bottom: 40px;
-}
-
-.container{
-    width: 90%;
-    max-width: 500px;
-    margin: 0 auto;
-    justify-content: center;
-}
-
-.texts p{
-    color: black;
-    text-align: left;
-    background-color: white;
-    width: 100%;
-    padding: 10px;
-    border-radius: 8px;
-    margin-bottom: 10px;
-}
-
-.texts p.replay {
-    text-align: right;
+.button {
+    width: 100px; /* Set the desired width */
+    height: 100px; /* Set the desired height, same as width */
+    font-size: 32px; /* Adjust font size if needed */
+    background-color: rgba(159,176,250,255);
+    color: white; /* Text color */
+    border-color: black; /* black border */
+    border-radius: 0; /* Ensure no rounded corners */
+    cursor: pointer; /* Pointer cursor on hover */
+    
+    margin: auto;
 }
