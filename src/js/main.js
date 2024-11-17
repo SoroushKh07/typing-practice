@@ -27,6 +27,10 @@ recognition.addEventListener('result', (e) => {
         if (text.includes('lesson one')){
             window.location = "lesson1.html";
         }
+
+        if(text.includes('back')){
+            window.location = "../index.html";
+        }
     }
 });
 
