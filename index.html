@@ -11,30 +11,31 @@
     <!-- Stylesheets -->
     <link rel="stylesheet" href="src/css/general_layout.css">
     <link rel="stylesheet" href="src/css/navbar.css">
+    <!-- Main.js -->
+     <script src="/src/js/index.js"></script>
     <!-- Page title -->
     <title>Main Menu - Bat Type</title>
 </head>
-
 <body>
     <!-- Navbar -->
     <nav>
         <ul>
             <!-- Home (main menu) -->
             <li class="active">
-                <a href="#main_menu"><i class="material-icons" style="text-align: left; font-size: 40px; color: #FFFFFF;">home</i></a>
+                <a href="#main_menu"><i class="material-icons" id="homeIcon" style="text-align: left; font-size: 40px; color: #FFFFFF;">home</i></a>
             </li>
             <!-- Settings -->
             <li>
-                <a href="#settings"><i class="material-icons" style="text-align: left; font-size: 40px; color: #FFFFFF">settings</i></a>
+                <a href="#settings"><i class="material-icons" id="settingsIcon" style="text-align: left; font-size: 40px; color: #FFFFFF">settings</i></a>
             </li>
             <!-- TTS (when clicked on, TTS turns off and icon changes to mute symbol)-->
             <li>
-                <a href="#main_menu"><i class="material-icons" style="text-align: left; font-size: 40px; color: #FFFFFF">volume_up</i></a>
+                <i class="material-icons" id="TTSIcon" style="text-align: left; font-size: 40px; color: #FFFFFF" onclick="muteTTS()">volume_up</i>
             </li>
             <!-- Account (dropdown contains logout button)-->
             <div class="topnav-right">
                 <li>
-                    <a href="#"><i class="material-icons" style="text-align: right; font-size: 40px; color: #FFFFFF;">account_circle</i><i class="material-icons" style="text-align: right; font-size: 40px; color: #FFFFFF;">arrow_drop_down</i></a>
+                    <a href="#"><i class="material-icons" id="userIcon" style="text-align: right; font-size: 40px; color: #FFFFFF;">account_circle</i><i class="material-icons" style="text-align: right; font-size: 40px; color: #FFFFFF;">arrow_drop_down</i></a>
                     <ul class="dropdown">
                         <li><a href="#account">My Account</a></li>
                         <li><a href="#opening_page">Logout</a></li>
@@ -43,18 +44,24 @@
             </div>
         </ul>
     </nav>
-
     <!-- Title -->
      <div class="container">
         <h1>Bat Type</h1>
         <h3>Continue by selecting any one of the four following areas of focus.</h3>
      </div>
+
      <!-- Buttons -->
     <div class="button_container">
-        <button class="main_menu_btns">Tutorial</button>
-        <button class="main_menu_btns">Lessons</button>
-        <button class="main_menu_btns">Practice</button>
-        <button class="main_menu_btns">Speed Typing</button>
+        <button class="main_menu_btns" onclick="redirectWebpage('#tutorial')">Tutorial</button>
+        <button class="main_menu_btns" onclick="redirectWebpage('#lessons')">Lessons</button>
+        <button class="main_menu_btns" onclick="redirectWebpage('#practice')">Practice</button>
+        <button class="main_menu_btns" onclick="redirectWebpage('#speed-typing')">Speed Typing</button>
     </div>
-    
+
+    <!-- Footer -->
+    <div class="footer">
+        <hr>
+        <h6>Bat Type</h6>
+        <p>Copyright © 2024 Group 2 (the better group)</p>
+    </div>
 </body>
