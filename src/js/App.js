@@ -24,8 +24,9 @@ const LESSONS = new Map([
 var lessonNum = 3000;//this will be changed based on which lesson you click on
 var lessonPhase = 0;//changes as lesson progresses
 var lessonCompleted = false;
-var words = 10;
+var wordCount = 10;
 var wordList = ["hii", "hello", "hey", "woo"]
+let startDate = new Date();
 
 
 class TypingPractice {
@@ -264,9 +265,9 @@ class TypingPractice {
     // return [...new Array(length)].map(() => charset + "
     if(lessonNum >= 1000 && lessonNum != 3000){
       let typingString = ""
-      for(let i = 0; i < words; i++ ){
+      for(let i = 0; i < wordCount; i++ ){
         typingString += [...new Array(length)].map(() => randomChoice(charset)).join("")
-        if(i!=words-1){
+        if(i!=wordCount-1){
           typingString+=" "
         }
       }
@@ -274,9 +275,9 @@ class TypingPractice {
     }
     else if (lessonNum == 3000){
       let typingString = ""
-      for(let i = 0; i < words; i++ ){
+      for(let i = 0; i < wordCount; i++ ){
         typingString += wordList[Math.floor(Math.random()*wordList.length)];
-        if(i!=words-1){
+        if(i!=wordCount-1){
           typingString+=" "
         }
       }
@@ -361,13 +362,19 @@ class TypingPractice {
 
 
     // Highlight errors.
-    let corrects = 0;
+    
     [...typed].forEach((c, i) => {
       if (given[i] !== c) {
         cellsGiven[i].classList.add("err");
         cellsTyped[i].classList.add("err");
       }
-      else if (given[i] == c) {
+    });
+    const totalGiven = this.given.slice("");
+    const totalTyped = this.typed.slice("");
+
+    let corrects = 0;
+    [...totalTyped].forEach((c, i) => {
+      if (totalGiven[i] == c) {
         corrects++;
       }
       if(lessonNum < 1000){
@@ -375,14 +382,19 @@ class TypingPractice {
           console.log(lessonPhase);
           corrects = 0;
           this.nextPhase();
-
-
         }
       }
-      else if(lessonNum >= 1000 && cellsTyped.length == cellsGiven.length){
+      else if(lessonNum >= 1000 && totalGiven.length == totalTyped.length && totalTyped.length-1 == i){
+        let endDate = new Date();
+        let finalDate = endDate - startDate 
+        let accuracy = corrects/totalTyped.length
+        let wpm = Math.floor((wordCount*accuracy)/(finalDate/60000))
+        console.log(wpm);
+        console.log(accuracy*100 + "%");
         //exit practice
       }
     });
+    
 
 
     this.dom.count.innerHTML = this.totalCharsTyped;
