@@ -33,7 +33,6 @@ const LESSONS = new Map([
  
 ])
 var lessonNum = parseInt(localStorage.getItem("lessonNumber"));
-lessonNum = 3000;
 var lessonPhase = 0;//changes as lesson progresses
 var lessonCompleted = false;
 var wordCount = 10;
