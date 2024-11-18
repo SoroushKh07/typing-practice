@@ -17,11 +17,23 @@ const LESSONS = new Map([
   ["Lesson 3", ["s l", "ss ll", "sl sl ls ls"]],
   ["Lesson 4", ["a ;", "aa ;;", "a; a; ;a ;a"]],
   ["lesson 1000", ["dad"]],
-  ["lesson 2000", [TOP_ROW]],
-  ["lesson 3000", ["wprds"]]
+  ["lesson 2000", ["TOP_ROW"]],
+  ["lesson 2001", ["HOME_ROW"]],
+  ["lesson 2002", ["BOTTOM_ROW"]],
+  ["lesson 2003", ["LEFT_HAND"]],
+  ["lesson 2004", ["RIGHT_HAND"]],
+  ["lesson 2005", ["UPPER"]],
+  ["lesson 2006", ["DIGITS"]],
+  ["lesson 2007", ["PUNCTUATION"]],
+  ["lesson 3000", ["All words"]],
+  ["lesson 3001", ["top words"]],
+  ["lesson 3002", ["home words"]],
+  ["lesson 3003", ["left words"]],
+  ["lesson 3004", ["right words"]]
  
 ])
 var lessonNum = parseInt(localStorage.getItem("lessonNumber"));
+lessonNum = 3000;
 var lessonPhase = 0;//changes as lesson progresses
 var lessonCompleted = false;
 var wordCount = 10;
@@ -47,6 +59,34 @@ var wordList = [
   "again", "student", "so", "seem", "might", "part", "hear", "its", "place", 
   "problem", "where", "believe", "country", "always", "week", "point", "hand", "off", 
   "play", "turn", "few", "group", "such"
+];
+var topWordList = [
+"type", "try", "true", "quite", "quit", "quiet", 
+  "yet", "query", "tie", "tip", "toy", "rye", 
+  "rip", "pure", "pie", "peer", "port", "pout", 
+  "poetry", "rope", "route", "queue", "pope", 
+  "top", "tour", "power", "pour", "peer", "quota", 
+  "quip"
+];
+var homeWordList = [
+"sad", "had", "lad", "fall", "hall", "dash", 
+  "all", "ask", "half", "lash", "flask", "salad", 
+  "gas", "hag", "lag", "gal", "alas", "skid", "shall", 
+  "aids", "kills", "saga", "gala", "hassle"
+];
+var leftWordList = [
+  "bag", "bed", "bad", "tab", "bat", 
+  "vase", "vast", "bar", "base", "cab", "cart", 
+  "cat", "crate", "fad", "fast", "far", "grate", 
+  "gate", "grab", "rat", "rate", "tar", "tear", 
+  "wage", "war", "wear", "web", "wet", "zest"
+];
+var rightWordList = [
+"him", "hop", "how", "hum", "yum", "you", 
+"nip", "hip", "pin", "pun",  
+"join", "joke", "pink", "link", "moon", 
+"noon", "noun", "plum", "pool", "poll", 
+"pull", "loom", "lion", "mile", "mill", "monk"
 ];
 let startDate = new Date();
 
@@ -95,14 +135,12 @@ class TypingPractice {
 
   _initEvents() {
     this.dom.input.addEventListener("focus", () => {
-      this.focused = true;
-      this.render();
+      document.getElementById("typedIn").focus();
     });
 
 
     this.dom.input.addEventListener("blur", () => {
-      this.focused = false;
-      this.render();
+      document.getElementById("typedIn").focus();
     });
 
 
@@ -112,29 +150,42 @@ class TypingPractice {
 
 
     this.dom.input.addEventListener("keydown", (e) => {
+      
       if (e.key === "Backspace") {
         if (lessonNum == 0 && lessonPhase == 0) {
           this.nextPhase();
         }
         if (lessonCompleted) {
-          // //   location.href = lessons Page
-          console.log("Back Out");
+          //location.href = lessons Page
+          console.log("test");
           lessonCompleted = false;
         }
         this.backup();
-      } else if(e.keyCode == 32 && lessonCompleted){
+        if(this.typed.length == 0){
+          //TEXT TO SPEECH
+          console.log(this.given.split(" ")[0]);
+        }
+      } else if(e.keyCode == 32 && lessonCompleted && lessonNum<1000){
         lessonNum++;
         lessonPhase = 0;
         this._resetCells();
         this._initBuffers();
         this.render();
         lessonCompleted = false;
-      } else if (!e.ctrlKey && e.key.match(this._charsetRegExp)) {
+
+      } else if(e.keyCode == 32 && lessonCompleted && lessonNum>=1000){
+        this._resetCells();
+        this._initBuffers();
+        this.render();
+        lessonCompleted = false;
+
+      }else if (!e.ctrlKey && e.key.match(this._charsetRegExp)) {
         if(startDate == null){
           startDate = new Date();
-          console.log(startDate);
         }
-        this.advance(e.key);
+        if(lessonCompleted!=true){
+          this.advance(e.key);
+        }
       } else {
         return;
       }
@@ -196,10 +247,25 @@ class TypingPractice {
 
 
   _initBuffers() {
+
     const words = [];
     // while (words.join(" ").length < this.bufferSize * 5) {
     words.push(this._makeRandomWord());
     // }
+    
+    let initialMessage;
+    switch(lessonNum){
+      case 1000: case 2000: case 2001: case 2002: case 2003: case 2004: case 2005: case 2006: case 2007: case 2008:
+        initialMessage = "In between sets of 5 letters is a space"
+        break;
+      case 3000: case 3001: case 3002: case 3003: case 3004:
+        initialMessage = "In between words is a space";
+        break;
+    }
+    //SAYS THINGS THAT EXPLAIN LESSON, FOR EXAMPLE: F AND J ARE THE THINGS WITH THE UNDERLINE THINGS
+    console.log(initialMessage);
+    //SAYS FIRST WORD
+    console.log(words[0].split(" ")[0]);
     this.given = words.join(" ");
     this.typed = "";
   }
@@ -264,11 +330,18 @@ class TypingPractice {
         }else{
           switch(lessonNum){
             case 2000: return TOP_ROW;
-            case 2001: return BOTTOM_ROW;
-            case 2002: return HOME_ROW;
+            case 2002: return BOTTOM_ROW;
+            case 2001: return HOME_ROW;
             case 2003: return LEFT_HAND;
             case 2004: return RIGHT_HAND;
-            case 3000: return wordList
+            case 2005: return LETTERS_UPPER;
+            case 2006: return DIGITS;
+            case 2007: return PUNCTUATION;
+            case 3000: return wordList;
+            case 3001: return topWordList;
+            case 3002: return middleWordList;
+            case 3003: return leftWordList;
+            case 3004: return rightWordList;
           }
 
 
@@ -285,7 +358,7 @@ class TypingPractice {
 
   _makeRandomWord() {
     // let length = Math.floor(Math.random() * this.maxWordLength + 1);
-    let length = 10;
+    let length = 5;
     const charset = this._makeCharset();
    
     // return [...new Array(length)].map(() => charset + "
@@ -299,10 +372,10 @@ class TypingPractice {
       }
       return typingString;
     }
-    else if (lessonNum == 3000){
+    else if (lessonNum >= 3000){
       let typingString = ""
       for(let i = 0; i < wordCount; i++ ){
-        typingString += wordList[Math.floor(Math.random()*wordList.length)];
+        typingString += charset[Math.floor(Math.random()*wordList.length)];
         if(i!=wordCount-1){
           typingString+=" "
         }
@@ -403,10 +476,13 @@ class TypingPractice {
       if (totalGiven[i] == c) {
         corrects++;
       }
+      if(i == totalTyped.length-1 && totalGiven[i] != totalTyped[i]){
+        //text to speech
+        console.log("Wrong")
+      }
       if(lessonNum < 1000){
         if (corrects == LESSONS.get(`Lesson ${lessonNum}`)[lessonPhase].length) {
-          console.log(lessonPhase);
-          corrects = 0;
+          console.log("nice!")
           this.nextPhase();
         }
       }
@@ -415,11 +491,35 @@ class TypingPractice {
         let finalDate = endDate - startDate 
         let accuracy = corrects/totalTyped.length
         let wpm = Math.floor((wordCount*accuracy)/(finalDate/60000))
+        //SAY WPM AND ACCURACY
         console.log(wpm);
         console.log(accuracy*100 + "%");
         //exit practice
+        this.nextPhase();
       }
     });
+    if(corrects!=totalTyped.length && lessonNum < 1000 && this.typed.length>1){
+      //text to speech
+      console.log(corrects + " " + totalTyped)
+      console.log("you still have a mistake!");
+    }
+    const wordProgressGiven = this.given.split(" ");
+    const wordProgressTyped = this.typed.split(" ");
+    let wordArray = [];
+    for(let i = 0; i<wordProgressGiven.length; i++){
+      for(let j = 0; j < wordProgressGiven[i].length; j++){
+        wordArray.push(wordProgressGiven[i]);
+      }
+      if(i+1!=wordProgressGiven.length){
+        wordArray.push(" ")
+      }
+    }
+    if(totalGiven[totalTyped.length] == " "){
+      //TEXT TO SPEECH THE WORD
+      console.log(wordArray[totalTyped.length+1])
+    }
+    
+
     
 
 
@@ -474,17 +574,26 @@ class TypingPractice {
     this.render();
   }
   nextPhase() {
-    if (LESSONS.get(`Lesson ${lessonNum}`).length-1 <= lessonPhase) {
+    if(lessonNum<1000){
+      if (LESSONS.get(`Lesson ${lessonNum}`).length-1 <= lessonPhase) {
+        //text to speech
+        console.log("press space to go to the next lesson, press backspace to exit")
+        lessonCompleted = true;
+      }
+      else {
+        lessonPhase++;
+        this._resetCells();
+        this._initBuffers();
+        this.render();
+      }
+    }
+    else if(lessonNum>=1000){
+      console.log("press space to go to restart, press backspace to exit")
       lessonCompleted = true;
     }
-    else {
-      lessonPhase++;
-    }
 
 
-    this._resetCells();
-    this._initBuffers();
-    this.render();
+    
   }
 }
 
