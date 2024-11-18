@@ -21,11 +21,33 @@ const LESSONS = new Map([
   ["lesson 3000", ["wprds"]]
  
 ])
-var lessonNum = 3000;//this will be changed based on which lesson you click on
+var lessonNum = parseInt(localStorage.getItem("lessonNumber"));
 var lessonPhase = 0;//changes as lesson progresses
 var lessonCompleted = false;
 var wordCount = 10;
-var wordList = ["hii", "hello", "hey", "woo"]
+var wordList = [
+  "the", "be", "and", "a", "of", "to", "in", "i", "you", "it", "have", "to", 
+  "that", "for", "do", "he", "with", "on", "this", "not", "we", "that", "not", 
+  "but", "they", "say", "at", "what", "his", "from", "go", "or", "by", "get", 
+  "she", "my", "can", "as", "know", "if", "me", "your", "all", "who", "about", 
+  "their", "will", "so", "would", "make", "just", "up", "think", "time", "there", 
+  "see", "her", "as", "out", "one", "come", "people", "take", "year", "him", 
+  "them", "some", "want", "how", "when", "which", "now", "like", "other", "could", 
+  "our", "into", "here", "then", "than", "look", "way", "more", "these", "no", 
+  "thing", "well", "because", "also", "two", "use", "tell", "good", "first", 
+  "man", "day", "find", "give", "more", "new", 
+  "one", "us", "any", "those", "very", "her", "need", "back", "there", "should", 
+  "even", "only", "many", "really", "work", "life", "why", "right", "down", "on", 
+  "try", "let", "something", "too", "call", "woman", "may", "still", "through", 
+  "mean", "after", "never", "no", "world", "in", "feel", "yeah", "great", "last", 
+  "child", "oh", "over", "ask", "when", "as", "school", "state", "much", "talk", 
+  "out", "keep", "leave", "put", "like", "help", "big", "where", "same", "all", 
+  "own", "while", "start", "three", "high", "every", "another", "become", "most", 
+  "between", "happen", "family", "over", "president", "old", "yes", "house", "show", 
+  "again", "student", "so", "seem", "might", "part", "hear", "its", "place", 
+  "problem", "where", "believe", "country", "always", "week", "point", "hand", "off", 
+  "play", "turn", "few", "group", "such"
+];
 let startDate = new Date();
 
 
