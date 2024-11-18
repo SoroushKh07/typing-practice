@@ -26,7 +26,7 @@ var lessonPhase = 0;//changes as lesson progresses
 var lessonCompleted = false;
 var wordCount = 10;
 var wordList = ["hii", "hello", "hey", "woo"]
-let startDate = new Date();
+let startDate;
 
 
 class TypingPractice {
@@ -108,6 +108,10 @@ class TypingPractice {
         this.render();
         lessonCompleted = false;
       } else if (!e.ctrlKey && e.key.match(this._charsetRegExp)) {
+        if(startDate == null){
+          startDate = new Date();
+          console.log(startDate);
+        }
         this.advance(e.key);
       } else {
         return;
