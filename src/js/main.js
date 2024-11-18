@@ -1,3 +1,9 @@
+function redirectWebpage(num) {
+    window.location = "typing.html";
+    localStorage.setItem("lessonNumber", num.toString());
+}
+
+
 // const texts = document.querySelector('.texts');
 
 window.SpeechRecognition = window.SpeechRecognition || window.webkitSpeechRecognition;
