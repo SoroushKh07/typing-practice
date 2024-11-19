@@ -10,6 +10,7 @@ const RIGHT_HAND = "jkl;uiopm,./nhy"
 const LETTERS_UPPER = LETTERS_LOWER.toUpperCase();
 const DIGITS = "0123456789";
 const PUNCTUATION = "`~!@#$%^&*()_+-=[]{};':\",./<>?";
+const wordLessons = [6,12,18,3000,3001,3002,3003,3004]
 const LESSONS = new Map([
   //Lessons
   ["Lesson 0", ["xcghasdjlcgysjlcgsjcygsljdcsdlyfgasdlycgslycgsdycs", " "]],
@@ -47,62 +48,62 @@ const LESSONS = new Map([
   ["lesson 3002", ["left words"]], //not complete
   ["lesson 3003", ["right words"]], //not complete
   ["lesson 3004", ["All words"]] //not complete
-
+ 
 ])
 var lessonNum = parseInt(localStorage.getItem("lessonNumber"));
 var lessonPhase = 0;//changes as lesson progresses
 var lessonCompleted = false;
 var wordCount = 10;
 var wordList = [
-  "the", "be", "and", "a", "of", "to", "in", "i", "you", "it", "have", "to",
-  "that", "for", "do", "he", "with", "on", "this", "not", "we", "that", "not",
-  "but", "they", "say", "at", "what", "his", "from", "go", "or", "by", "get",
-  "she", "my", "can", "as", "know", "if", "me", "your", "all", "who", "about",
-  "their", "will", "so", "would", "make", "just", "up", "think", "time", "there",
-  "see", "her", "as", "out", "one", "come", "people", "take", "year", "him",
-  "them", "some", "want", "how", "when", "which", "now", "like", "other", "could",
-  "our", "into", "here", "then", "than", "look", "way", "more", "these", "no",
-  "thing", "well", "because", "also", "two", "use", "tell", "good", "first",
-  "man", "day", "find", "give", "more", "new",
-  "one", "us", "any", "those", "very", "her", "need", "back", "there", "should",
-  "even", "only", "many", "really", "work", "life", "why", "right", "down", "on",
-  "try", "let", "something", "too", "call", "woman", "may", "still", "through",
-  "mean", "after", "never", "no", "world", "in", "feel", "yeah", "great", "last",
-  "child", "oh", "over", "ask", "when", "as", "school", "state", "much", "talk",
-  "out", "keep", "leave", "put", "like", "help", "big", "where", "same", "all",
-  "own", "while", "start", "three", "high", "every", "another", "become", "most",
-  "between", "happen", "family", "over", "president", "old", "yes", "house", "show",
-  "again", "student", "so", "seem", "might", "part", "hear", "its", "place",
-  "problem", "where", "believe", "country", "always", "week", "point", "hand", "off",
+  "the", "be", "and", "a", "of", "to", "in", "i", "you", "it", "have", "to", 
+  "that", "for", "do", "he", "with", "on", "this", "not", "we", "that", "not", 
+  "but", "they", "say", "at", "what", "his", "from", "go", "or", "by", "get", 
+  "she", "my", "can", "as", "know", "if", "me", "your", "all", "who", "about", 
+  "their", "will", "so", "would", "make", "just", "up", "think", "time", "there", 
+  "see", "her", "as", "out", "one", "come", "people", "take", "year", "him", 
+  "them", "some", "want", "how", "when", "which", "now", "like", "other", "could", 
+  "our", "into", "here", "then", "than", "look", "way", "more", "these", "no", 
+  "thing", "well", "because", "also", "two", "use", "tell", "good", "first", 
+  "man", "day", "find", "give", "more", "new", 
+  "one", "us", "any", "those", "very", "her", "need", "back", "there", "should", 
+  "even", "only", "many", "really", "work", "life", "why", "right", "down", "on", 
+  "try", "let", "something", "too", "call", "woman", "may", "still", "through", 
+  "mean", "after", "never", "no", "world", "in", "feel", "yeah", "great", "last", 
+  "child", "oh", "over", "ask", "when", "as", "school", "state", "much", "talk", 
+  "out", "keep", "leave", "put", "like", "help", "big", "where", "same", "all", 
+  "own", "while", "start", "three", "high", "every", "another", "become", "most", 
+  "between", "happen", "family", "over", "president", "old", "yes", "house", "show", 
+  "again", "student", "so", "seem", "might", "part", "hear", "its", "place", 
+  "problem", "where", "believe", "country", "always", "week", "point", "hand", "off", 
   "play", "turn", "few", "group", "such"
 ];
 var topWordList = [
-  "type", "try", "true", "quite", "quit", "quiet",
-  "yet", "query", "tie", "tip", "toy", "rye",
-  "rip", "pure", "pie", "peer", "port", "pout",
-  "poetry", "rope", "route", "queue", "pope",
-  "top", "tour", "power", "pour", "peer", "quota",
+"type", "try", "true", "quite", "quit", "quiet", 
+  "yet", "query", "tie", "tip", "toy", "rye", 
+  "rip", "pure", "pie", "peer", "port", "pout", 
+  "poetry", "rope", "route", "queue", "pope", 
+  "top", "tour", "power", "pour", "peer", "quota", 
   "quip"
 ];
 var homeWordList = [
-  "sad", "had", "lad", "fall", "hall", "dash",
-  "all", "ask", "half", "lash", "flask", "salad",
-  "gas", "hag", "lag", "gal", "alas", "skid", "shall",
+"sad", "had", "lad", "fall", "hall", "dash", 
+  "all", "ask", "half", "lash", "flask", "salad", 
+  "gas", "hag", "lag", "gal", "alas", "skid", "shall", 
   "aids", "kills", "saga", "gala", "hassle"
 ];
 var leftWordList = [
-  "bag", "bed", "bad", "tab", "bat",
-  "vase", "vast", "bar", "base", "cab", "cart",
-  "cat", "crate", "fad", "fast", "far", "grate",
-  "gate", "grab", "rat", "rate", "tar", "tear",
+  "bag", "bed", "bad", "tab", "bat", 
+  "vase", "vast", "bar", "base", "cab", "cart", 
+  "cat", "crate", "fad", "fast", "far", "grate", 
+  "gate", "grab", "rat", "rate", "tar", "tear", 
   "wage", "war", "wear", "web", "wet", "zest"
 ];
 var rightWordList = [
-  "him", "hop", "how", "hum", "yum", "you",
-  "nip", "hip", "pin", "pun",
-  "join", "joke", "pink", "link", "moon",
-  "noon", "noun", "plum", "pool", "poll",
-  "pull", "loom", "lion", "mile", "mill", "monk"
+"him", "hop", "how", "hum", "yum", "you", 
+"nip", "hip", "pin", "pun",  
+"join", "joke", "pink", "link", "moon", 
+"noon", "noun", "plum", "pool", "poll", 
+"pull", "loom", "lion", "mile", "mill", "monk"
 ];
 let startDate;
 
@@ -166,24 +167,38 @@ class TypingPractice {
 
 
     this.dom.input.addEventListener("keydown", (e) => {
-
+      
       if (e.key === "Backspace") {
         if (lessonNum == 0 && lessonPhase == 0) {
           this.nextPhase();
         }
         if (lessonCompleted) {
           location.href = "../html/lessons.html";
-
           lessonCompleted = false;
-        } else {
+          }else{
           this.backup();
         }
-
-        if (this.typed.length == 0) {
+        this.backup();
+        if(this.typed.length == 0){
           //TEXT TO SPEECH
-          speak(this.given.split(" ")[0]);
+          
+          console.log(this.given.split(" ")[0]);
+          if(wordLessons.indexOf(lessonNum)>0){
+            console.log(this.given.split(" ")[0])
+          }
+          else{
+            let tempWord = this.given.split(" ")[0].split("")
+            let tempSpeaker = "";
+            for(let i = 0; i<tempWord.length; i++){
+              tempSpeaker += tempWord[i];
+              if(i+1!=tempWord.length){
+                tempSpeaker+= " ";
+              }
+            }
+            console.log(tempSpeaker);
+          }
         }
-      } else if (e.keyCode == 32 && lessonCompleted && lessonNum < 1000) {
+      } else if(e.keyCode == 32 && lessonCompleted && lessonNum<1000){
         lessonNum++;
         lessonPhase = 0;
         this._resetCells();
@@ -191,17 +206,17 @@ class TypingPractice {
         this.render();
         lessonCompleted = false;
 
-      } else if (e.keyCode == 32 && lessonCompleted && lessonNum >= 1000) {
+      } else if(e.keyCode == 32 && lessonCompleted && lessonNum>=1000){
         this._resetCells();
         this._initBuffers();
         this.render();
         lessonCompleted = false;
 
-      } else if (!e.ctrlKey && e.key.match(this._charsetRegExp)) {
-        if (startDate == null) {
+      }else if (!e.ctrlKey && e.key.match(this._charsetRegExp)) {
+        if(startDate == null){
           startDate = new Date();
         }
-        if (lessonCompleted != true) {
+        if(lessonCompleted!=true){
           this.advance(e.key);
         }
       } else {
@@ -270,9 +285,9 @@ class TypingPractice {
     // while (words.join(" ").length < this.bufferSize * 5) {
     words.push(this._makeRandomWord());
     // }
-
+    
     let initialMessage;
-    switch (lessonNum) {
+    switch(lessonNum){
       case 1000: case 2000: case 2001: case 2002: case 2003: case 2004: case 2005: case 2006: case 2007: case 2008:
         initialMessage = "In between sets of 5 letters is a space"
         break;
@@ -281,10 +296,22 @@ class TypingPractice {
         break;
     }
     //SAYS THINGS THAT EXPLAIN LESSON, FOR EXAMPLE: F AND J ARE THE THINGS WITH THE UNDERLINE THINGS
-    speak(initialMessage);
-    speak('test');
+    console.log(initialMessage);
     //SAYS FIRST WORD
-    speak(words[0].split(" ")[0]);
+    if(wordLessons.indexOf(lessonNum)>0){
+      console.log(words[0].split(" ")[0])
+    }
+    else{
+      let tempWord = words[0].split(" ")[0].split("")
+      let tempSpeaker = "";
+      for(let i = 0; i<tempWord.length; i++){
+        tempSpeaker += tempWord[i];
+        if(i+1!=tempWord.length){
+          tempSpeaker+= " ";
+        }
+      }
+      console.log(tempSpeaker);
+    }
     this.given = words.join(" ");
     this.typed = "";
   }
@@ -338,38 +365,38 @@ class TypingPractice {
     const s = this.weights;
 
 
-    if (lessonNum >= 1000) {
-      if (lessonNum < 2000) {
-        return (
-          LETTERS_LOWER.repeat(s.lettersLower) +
-          LETTERS_UPPER.repeat(s.lettersUpper) +
-          DIGITS.repeat(s.digits) +
-          PUNCTUATION.repeat(s.punctuation)
-        );
-      } else {
-        switch (lessonNum) {
-          case 2000: return TOP_ROW;
-          case 2002: return BOTTOM_ROW;
-          case 2001: return HOME_ROW;
-          case 2003: return LEFT_HAND;
-          case 2004: return RIGHT_HAND;
-          case 2005: return LETTERS_UPPER;
-          case 2006: return DIGITS;
-          case 2007: return PUNCTUATION;
-          case 3000: return topWordList;
-          case 3001: return middleWordList;
-          case 3002: return leftWordList;
-          case 3003: return rightWordList;
-          case 3004: return wordList;
+        if(lessonNum >= 1000){
+        if(lessonNum < 2000){
+          return (
+            LETTERS_LOWER.repeat(s.lettersLower) +
+            LETTERS_UPPER.repeat(s.lettersUpper) +
+            DIGITS.repeat(s.digits) +
+            PUNCTUATION.repeat(s.punctuation)
+            );
+        }else{
+          switch(lessonNum){
+            case 2000: return TOP_ROW;
+            case 2002: return BOTTOM_ROW;
+            case 2001: return HOME_ROW;
+            case 2003: return LEFT_HAND;
+            case 2004: return RIGHT_HAND;
+            case 2005: return LETTERS_UPPER;
+            case 2006: return DIGITS;
+            case 2007: return PUNCTUATION;
+            case 3000: return wordList;
+            case 3001: return topWordList;
+            case 3002: return middleWordList;
+            case 3003: return leftWordList;
+            case 3004: return rightWordList;
+          }
+
+
         }
 
 
+      }else{
+         return (LESSONS.get(`Lesson ${lessonNum}`)[lessonPhase]);
       }
-
-
-    } else {
-      return (LESSONS.get(`Lesson ${lessonNum}`)[lessonPhase]);
-    }
 
 
   }
@@ -379,34 +406,32 @@ class TypingPractice {
     // let length = Math.floor(Math.random() * this.maxWordLength + 1);
     let length = 5;
     const charset = this._makeCharset();
-
+   
     // return [...new Array(length)].map(() => charset + "
-    if (lessonNum >= 1000 && lessonNum < 3000) {
-      length = 5;
+    if(lessonNum >= 1000 && lessonNum != 3000){
       let typingString = ""
-      for (let i = 0; i < wordCount; i++) {
+      for(let i = 0; i < wordCount; i++ ){
         typingString += [...new Array(length)].map(() => randomChoice(charset)).join("")
-        if (i != wordCount - 1) {
-          typingString += " "
+        if(i!=wordCount-1){
+          typingString+=" "
         }
       }
       return typingString;
     }
-    else if (lessonNum >= 3000) {
-      length = 1;
+    else if (lessonNum >= 3000){
       let typingString = ""
-      for (let i = 0; i < wordCount; i++) {
-        typingString += charset[Math.floor(Math.random() * wordList.length)];
-        if (i != wordCount - 1) {
-          typingString += " "
+      for(let i = 0; i < wordCount; i++ ){
+        typingString += charset[Math.floor(Math.random()*wordList.length)];
+        if(i!=wordCount-1){
+          typingString+=" "
         }
       }
       return typingString;
     }
-    else {
+    else{
       return charset;
-    }
-
+    }                                                                  
+   
   }
 
 
@@ -482,7 +507,7 @@ class TypingPractice {
 
 
     // Highlight errors.
-
+    
     [...typed].forEach((c, i) => {
       if (given[i] !== c) {
         cellsGiven[i].classList.add("err");
@@ -497,51 +522,63 @@ class TypingPractice {
       if (totalGiven[i] == c) {
         corrects++;
       }
-      if (i == totalTyped.length - 1 && totalGiven[i] != totalTyped[i]) {
+      if(i == totalTyped.length-1 && totalGiven[i] != totalTyped[i]){
         //text to speech
-        speak("Wrong")
+        console.log("Wrong")
       }
-      if (lessonNum < 1000) {
+      if(lessonNum < 1000){
         if (corrects == LESSONS.get(`Lesson ${lessonNum}`)[lessonPhase].length) {
-          speak("nice!")
+          console.log("nice!")
           this.nextPhase();
         }
       }
-      else if (lessonNum >= 1000 && totalGiven.length == totalTyped.length && totalTyped.length - 1 == i) {
+      else if(lessonNum >= 1000 && totalGiven.length == totalTyped.length && totalTyped.length-1 == i){
         let endDate = new Date();
-        let finalDate = endDate - startDate
-        let accuracy = corrects / totalTyped.length
-        let wpm = Math.floor((wordCount * accuracy) / (finalDate / 60000))
+        let finalDate = endDate - startDate 
+        let accuracy = corrects/totalTyped.length
+        let wpm = Math.floor((wordCount*accuracy)/(finalDate/60000))
         //SAY WPM AND ACCURACY
-        speak(wpm);
-        speak(accuracy * 100 + "%");
+        console.log(wpm);
+        console.log(accuracy*100 + "%");
         //exit practice
         this.nextPhase();
       }
     });
-    if (corrects != totalTyped.length && lessonNum < 1000 && this.typed.length > 1) {
+    if(corrects!=totalTyped.length && lessonNum < 1000 && this.typed.length>1){
       //text to speech
-      speak(corrects + " " + totalTyped)
-      speak("you still have a mistake!");
+      console.log("you still have a mistake!");
     }
     const wordProgressGiven = this.given.split(" ");
     const wordProgressTyped = this.typed.split(" ");
     let wordArray = [];
-    for (let i = 0; i < wordProgressGiven.length; i++) {
-      for (let j = 0; j < wordProgressGiven[i].length; j++) {
+    for(let i = 0; i<wordProgressGiven.length; i++){
+      for(let j = 0; j < wordProgressGiven[i].length; j++){
         wordArray.push(wordProgressGiven[i]);
       }
-      if (i + 1 != wordProgressGiven.length) {
+      if(i+1!=wordProgressGiven.length){
         wordArray.push(" ")
       }
     }
-    if (totalGiven[totalTyped.length] == " ") {
+    if(totalGiven[totalTyped.length] == " "){
       //TEXT TO SPEECH THE WORD
-      speak(wordArray[totalTyped.length + 1])
+      if(wordLessons.indexOf(lessonNum)>0){
+        console.log(wordArray[totalTyped.length+1])
+      }
+      else{
+        let tempWord = wordArray[totalTyped.length+1].split("")
+        let tempSpeaker = "";
+        for(let i = 0; i<tempWord.length; i++){
+          tempSpeaker += tempWord[i];
+          if(i+1!=tempWord.length){
+            tempSpeaker+= " ";
+          }
+        }
+        console.log(tempSpeaker);
+      }
     }
+    
 
-
-
+    
 
 
     this.dom.count.innerHTML = this.totalCharsTyped;
@@ -595,10 +632,10 @@ class TypingPractice {
     this.render();
   }
   nextPhase() {
-    if (lessonNum < 1000) {
-      if (LESSONS.get(`Lesson ${lessonNum}`).length - 1 <= lessonPhase) {
+    if(lessonNum<1000){
+      if (LESSONS.get(`Lesson ${lessonNum}`).length-1 <= lessonPhase) {
         //text to speech
-        speak("press space to go to the next lesson, press backspace to exit")
+        console.log("press space to go to the next lesson, press backspace to exit")
         lessonCompleted = true;
       }
       else {
@@ -608,13 +645,13 @@ class TypingPractice {
         this.render();
       }
     }
-    else if (lessonNum >= 1000) {
-      speak("press space to go to restart, press backspace to exit")
+    else if(lessonNum>=1000){
+      console.log("press space to go to restart, press backspace to exit")
       lessonCompleted = true;
     }
 
 
-
+    
   }
 }
 
@@ -802,7 +839,6 @@ practice.focus();
 
 const TypedInput = document.getElementById('typedIn')
 
-
 const keys = ['`', '1', '2', '3', '4', '5','6','7', '8', '9',  '0', '-', '=', 'backspace', 'q', 'w', 'e', 'r', 't', 'y', 'u', 'i', 'o', 'p', '[', ']', '|', 'a', 's', 'd', 'f', 'g', 'h', 'j', 'k', 'l', ';', "'", '"', 'z', 'x', 'c', 'v', 'b', 'n', 'm', ',', '.', '/', '*', '+', '!', '@', '#', '$', '%', '^', '&', '(', ')', '_', '{', '}', '\\', ':', '<', '>', '?', '~', ' ', 'Q', 'W', 'E', 'R', 'T', 'Y', 'U','I','O', 'P', 'A', 'S', 'D', 'F', 'G', 'G', 'H', 'J', 'K', 'L', 'Z', 'X', 'C', 'V', 'B', 'N', 'M']
 
 var soundBase = ['Grave', 'One', 'Two', 'Three', 'Four', 'Five','Six','Seven', 'Eight', 'Nine',  'Zero', 'Hyphen', 'Equal', 'Backspace', 'q', 'w', 'e', 'r', 't', 'y', 'u', 'i', 'o', 'p', 'Open Bracket', 'Close Bracket', 'Pipe', 'a', 's', 'd', 'f', 'g', 'h', 'j', 'k', 'l', 'Semicolon', "Single Quote", 'Double  Quote', 'z', 'x', 'c', 'v', 'b', 'n', 'm', 'Comma', 'Dot', 'Slash', 'Asterisk', 'Addition', 'Exclamation', 'At', 'Pound', 'Dollar Sign', 'Percent', 'Carat', 'And', 'Left Bracket', 'Right Bracket', 'Underscore', 'Open Brace', 'Close Brace', 'Backslash', 'Colon', 'Less Than', 'Greater Than', 'Question Mark', 'Tilde', 'Spacebar', 'Q', 'W', 'E', 'R', 'T', 'Y', 'U','I','O', 'P', 'A', 'S', 'D', 'F', 'G', 'G', 'H', 'J', 'K', 'L', 'Z', 'X', 'C', 'V', 'B', 'N', 'M']
@@ -814,44 +850,45 @@ alert('Keys saved!');
 
 const keys = ['`', '1', '2', '3', '4', '5', '6', '7', '8', '9', '0', '-', '=', 'Backspace', 'q', 'w', 'e', 'r', 't', 'y', 'u', 'i', 'o', 'p', '[', ']', '|', 'a', 's', 'd', 'f', 'g', 'h', 'j', 'k', 'l', ';', "'", '"', 'z', 'x', 'c', 'v', 'b', 'n', 'm', ',', '.', '/', '*', '+', '!', '@', '#', '$', '%', '^', '&', '(', ')', '_', '{', '}', '\\', ':', '<', '>', '?', '~', ' ', 'Q', 'W', 'E', 'R', 'T', 'Y', 'U', 'I', 'O', 'P', 'A', 'S', 'D', 'F', 'G', 'G', 'H', 'J', 'K', 'L', 'Z', 'X', 'C', 'V', 'B', 'N', 'M']
 
-var soundBase = ['Grave', 'One', 'Two', 'Three', 'Four', 'Five', 'Six', 'Seven', 'Eight', 'Nine', 'Zero', 'Hyphen', 'Equal', 'Backspace', 'q', 'w', 'e', 'r', 't', 'y', 'u', 'i', 'o', 'p', 'Open Bracket', 'Close Bracket', 'Pipe', 'a', 's', 'd', 'f', 'g', 'h', 'j', 'k', 'l', 'Semicolon', "Single Quote", 'Double  Quote', 'z', 'x', 'c', 'v', 'b', 'n', 'm', 'Comma', 'Dot', 'Slash', 'Asterisk', 'Addition', 'Exclamation', 'At', 'Pound', 'Dollar Sign', 'Percent', 'Carat', 'And', 'Left Bracket', 'Right Bracket', 'Underscore', 'Open Brace', 'Close Brace', 'Backslash', 'Colon', 'Less Than', 'Greater Than', 'Question Mark', 'Tilde', 'Space bar', 'Q', 'W', 'E', 'R', 'T', 'Y', 'U', 'I', 'O', 'P', 'A', 'S', 'D', 'F', 'G', 'G', 'H', 'J', 'K', 'L', 'Z', 'X', 'C', 'V', 'B', 'N', 'M']
+
+var soundBase = ['Grave', 'One', 'Two', 'Three', 'Four', 'Five','Six','Seven', 'Eight', 'Nine',  'Zero', 'Hyphen', 'Equal', 'Backspace', 'q', 'w', 'e', 'r', 't', 'y', 'u', 'i', 'o', 'p', 'Open Bracket', 'Close Bracket', 'Pipe', 'a', 's', 'd', 'f', 'g', 'h', 'j', 'k', 'l', 'Semicolon', "Single Quote", 'Double  Quote', 'z', 'x', 'c', 'v', 'b', 'n', 'm', 'Comma', 'Dot', 'Slash', 'Asterisk', 'Addition', 'Exclamation', 'At', 'Pound', 'Dollar Sign', 'Percent', 'Carat', 'And', 'Left Bracket', 'Right Bracket', 'Underscore', 'Open Brace', 'Close Brace', 'Backslash', 'Colon', 'Less Than', 'Greater Than', 'Question Mark', 'Tilde', 'Spacebar', 'Q', 'W', 'E', 'R', 'T', 'Y', 'U','I','O', 'P', 'A', 'S', 'D', 'F', 'G', 'G', 'H', 'J', 'K', 'L', 'Z', 'X', 'C', 'V', 'B', 'N', 'M']
 
 
 if ('speechSynthesis' in window) {
 
 
 
-  TypedInput.addEventListener('keydown', e => {
+    TypedInput.addEventListener('keydown', e =>{
 
-    const speech = new SpeechSynthesisUtterance(soundBase[keys.indexOf(e.key)]);
+      const speech = new SpeechSynthesisUtterance(soundBase[keys.indexOf(e.key)]);
 
-    speech.rate = 1.2
+      speech.rate = 1.2
 
-    if (soundBase[keys.indexOf(e.key)] != 'undefined') {
+      if (soundBase[keys.indexOf(e.key)]!='undefined'){
 
-      if (window.speechSynthesis.speaking) {
+        if (window.speechSynthesis.speaking) {
 
-        window.speechSynthesis.cancel();
+          window.speechSynthesis.cancel();
+
+        }
+
+        
+
+        speech.lang = "en-US";
+
+        window.speechSynthesis.speak(speech);
 
       }
 
+    })
 
+    // Speech Synthesis supported 🎉
 
-      speech.lang = "en-US";
+}else{
 
-      window.speechSynthesis.speak(speech);
+    // Speech Synthesis Not Supported 😣
 
-    }
-
-  })
-
-  // Speech Synthesis supported 🎉
-
-} else {
-
-  // Speech Synthesis Not Supported 😣
-
-  alert("Sorry, your browser doesn't support text to speech!");
+    alert("Sorry, your browser doesn't support text to speech!");
 
 
 
@@ -859,23 +896,23 @@ if ('speechSynthesis' in window) {
 
 
 
-  //recognize and tts keys
+//recognize and tts keys
 
 
 
-  const TypedInput = document.getElementById('typedIn')
+const TypedInput = document.getElementById('typedIn')
 
 
 
-  const keys = ['`', '1', '2', '3', '4', '5', '6', '7', '8', '9', '0', '-', '=', 'Backspace', 'q', 'w', 'e', 'r', 't', 'y', 'u', 'i', 'o', 'p', '[', ']', '|', 'a', 's', 'd', 'f', 'g', 'h', 'j', 'k', 'l', ';', "'", '"', 'z', 'x', 'c', 'v', 'b', 'n', 'm', ',', '.', '/', '*', '+', '!', '@', '#', '$', '%', '^', '&', '(', ')', '_', '{', '}', '\\', ':', '<', '>', '?', '~', ' ', 'Q', 'W', 'E', 'R', 'T', 'Y', 'U', 'I', 'O', 'P', 'A', 'S', 'D', 'F', 'G', 'G', 'H', 'J', 'K', 'L', 'Z', 'X', 'C', 'V', 'B', 'N', 'M']
+const keys = ['`', '1', '2', '3', '4', '5','6','7', '8', '9',  '0', '-', '=', 'Backspace', 'q', 'w', 'e', 'r', 't', 'y', 'u', 'i', 'o', 'p', '[', ']', '|', 'a', 's', 'd', 'f', 'g', 'h', 'j', 'k', 'l', ';', "'", '"', 'z', 'x', 'c', 'v', 'b', 'n', 'm', ',', '.', '/', '*', '+', '!', '@', '#', '$', '%', '^', '&', '(', ')', '_', '{', '}', '\\', ':', '<', '>', '?', '~', ' ', 'Q', 'W', 'E', 'R', 'T', 'Y', 'U','I','O', 'P', 'A', 'S', 'D', 'F', 'G', 'G', 'H', 'J', 'K', 'L', 'Z', 'X', 'C', 'V', 'B', 'N', 'M']
 
 
 
-  var soundBase = ['Grave', 'One', 'Two', 'Three', 'Four', 'Five', 'Six', 'Seven', 'Eight', 'Nine', 'Zero', 'Hyphen', 'Equal', 'Backspace', 'q', 'w', 'e', 'r', 't', 'y', 'u', 'i', 'o', 'p', 'Open Bracket', 'Close Bracket', 'Pipe', 'a', 's', 'd', 'f', 'g', 'h', 'j', 'k', 'l', 'Semicolon', "Single Quote", 'Double  Quote', 'z', 'x', 'c', 'v', 'b', 'n', 'm', 'Comma', 'Dot', 'Slash', 'Asterisk', 'Addition', 'Exclamation', 'At', 'Pound', 'Dollar Sign', 'Percent', 'Carat', 'And', 'Left Bracket', 'Right Bracket', 'Underscore', 'Open Brace', 'Close Brace', 'Backslash', 'Colon', 'Less Than', 'Greater Than', 'Question Mark', 'Tilde', 'Spacebar', 'Q', 'W', 'E', 'R', 'T', 'Y', 'U', 'I', 'O', 'P', 'A', 'S', 'D', 'F', 'G', 'G', 'H', 'J', 'K', 'L', 'Z', 'X', 'C', 'V', 'B', 'N', 'M']
+var soundBase = ['Grave', 'One', 'Two', 'Three', 'Four', 'Five','Six','Seven', 'Eight', 'Nine',  'Zero', 'Hyphen', 'Equal', 'Backspace', 'q', 'w', 'e', 'r', 't', 'y', 'u', 'i', 'o', 'p', 'Open Bracket', 'Close Bracket', 'Pipe', 'a', 's', 'd', 'f', 'g', 'h', 'j', 'k', 'l', 'Semicolon', "Single Quote", 'Double  Quote', 'z', 'x', 'c', 'v', 'b', 'n', 'm', 'Comma', 'Dot', 'Slash', 'Asterisk', 'Addition', 'Exclamation', 'At', 'Pound', 'Dollar Sign', 'Percent', 'Carat', 'And', 'Left Bracket', 'Right Bracket', 'Underscore', 'Open Brace', 'Close Brace', 'Backslash', 'Colon', 'Less Than', 'Greater Than', 'Question Mark', 'Tilde', 'Spacebar', 'Q', 'W', 'E', 'R', 'T', 'Y', 'U','I','O', 'P', 'A', 'S', 'D', 'F', 'G', 'G', 'H', 'J', 'K', 'L', 'Z', 'X', 'C', 'V', 'B', 'N', 'M']
 
 
 
-  if ('speechSynthesis' in window) {
+if ('speechSynthesis' in window) {
 
 
 
@@ -883,7 +920,7 @@ if ('speechSynthesis' in window) {
 
 
 
-    TypedInput.addEventListener('keydown', e => {
+    TypedInput.addEventListener('keydown', e =>{
 
 
 
@@ -895,7 +932,7 @@ if ('speechSynthesis' in window) {
 
 
 
-      if (soundBase[keys.indexOf(e.key)] != 'undefined') {
+      if (soundBase[keys.indexOf(e.key)]!='undefined'){
 
 
 
@@ -911,7 +948,7 @@ if ('speechSynthesis' in window) {
 
 
 
-
+        
 
 
 
@@ -935,7 +972,7 @@ if ('speechSynthesis' in window) {
 
 
 
-  } else {
+}else{
 
 
 
@@ -944,16 +981,4 @@ if ('speechSynthesis' in window) {
 
 
     alert("Sorry, your browser doesn't support text to speech!");
-  }
-}
-function speak(text) {
-  if ('speechSynthesis' in window) {
-    const speech = new SpeechSynthesisUtterance(text); // Use the text parameter
-    speech.lang = 'en-US'; // Set language
-    speech.pitch = 1; // Voice pitch (1 = normal)
-    speech.rate = 2; // Voice rate (1 = normal)
-    window.speechSynthesis.speak(speech); // Speak the text
-  } else {
-    console.error('Sorry, your browser does not support text-to-speech.');
-  }
-}
+}}
