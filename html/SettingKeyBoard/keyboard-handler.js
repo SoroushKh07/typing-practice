@@ -133,7 +133,7 @@ const Keyboard = {
 
         this.properties.keyLayout.forEach((key) => {
             const insertLineBreak =
-                ["backspace", "p", "enter", "?"].indexOf(key) !== -1;
+                ["backspace", " ", "enter", "?"].indexOf(key) !== -1;
 
             switch (key) {
                 case "backspace":
@@ -161,16 +161,7 @@ const Keyboard = {
                     this.elements.capsKey = this.keyElement;
                     break;
 
-                case "enter":
-                    this._createKeyBtn(
-                        "keyboard_return", "keyboard__key--wide",
-                        () => {
-                            this.properties.value += "\n";
-                            this._updateValueInTarget();
-                        });
-                    break;
-
-                case "space":
+                case " ":
                     this._createKeyBtn(
                         "space_bar", "keyboard__key--extra--wide",
                         () => {
