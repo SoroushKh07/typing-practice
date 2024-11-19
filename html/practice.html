@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <!-- Google icons -->
+    <link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons"/>
+    <!-- Google fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Geist+Mono:wght@100..900&family=Noto+Sans:ital,wght@0,100..900;1,100..900&display=swap" rel="stylesheet">
+    <!-- Stylesheets -->
+    <link rel="stylesheet" href="../src/css/general_layout.css">
+    <link rel="stylesheet" href="../src/css/navbar.css">
+    <!-- Scripts -->
+    <script src="../src/js/main.js" defer></script>
+    <script src="/src/js/index.js"></script>
+    <!-- Page title -->
+    <title>Practice - Bat Type</title>
+</head>
+<body>
+    <!-- Navbar -->
+    <nav>
+        <ul>
+            <!-- Home (main menu) -->
+            <li class="active">
+                <a href="#main_menu"><i class="material-icons" id="homeIcon" style="text-align: left; font-size: 40px; color: #FFFFFF;">home</i></a>
+            </li>
+            <!-- Settings -->
+            <li>
+                <a href="#settings"><i class="material-icons" id="settingsIcon" style="text-align: left; font-size: 40px; color: #FFFFFF">settings</i></a>
+            </li>
+            <!-- TTS (when clicked on, TTS turns off and icon changes to mute symbol)-->
+            <li>
+                <i class="material-icons" id="TTSIcon" style="text-align: left; font-size: 40px; color: #FFFFFF" onclick="muteTTS()">volume_up</i>
+            </li>
+            <!-- Account (dropdown contains logout button)-->
+            <div class="topnav-right">
+                <li>
+                    <a href="#"><i class="material-icons" id="userIcon" style="text-align: right; font-size: 40px; color: #FFFFFF;">account_circle</i><i class="material-icons" style="text-align: right; font-size: 40px; color: #FFFFFF;">arrow_drop_down</i></a>
+                    <ul class="dropdown">
+                        <li><a href="#account">My Account</a></li>
+                        <li><a href="#opening_page">Logout</a></li>
+                    </ul>
+                </li>
+            </div>
+        </ul>
+    </nav>
+
+    <!-- Back icon -->
+    <a href="../index.html"><i class="material-icons" alt="back to main menu" style="text-align: left; font-size: 2.5rem; font-weight: bolder; color: #16325B; margin-top: 5rem; margin-left: 5rem; margin-bottom: 0rem; padding: 0rem;">arrow_back_ios</i></a>
+
+    <!-- Title -->
+    <div class="container">
+        <h1 style="margin-top: -3rem;">Practice</h1>
+     </div>
+
+    <!-- Buttons -->
+    <div class="lessons_btn_container">
+        <button class="main_menu_btns" alt="lesson 1" onclick="redirectWebpage(1000)">Random Characters</button>
+        <button class="main_menu_btns" alt="lesson 2" onclick="redirectWebpage(2000)">Top Row Characters</button>
+        <button class="main_menu_btns" alt="lesson 3" onclick="redirectWebpage(2001)">Home Row Characters</button>
+        <button class="main_menu_btns" alt="lesson 4" onclick="redirectWebpage(2002)">Bottom Row Characters</button>
+        <button class="main_menu_btns" alt="lesson 5" onclick="redirectWebpage(2003)">Left Hand Characters</button>
+        <button class="main_menu_btns" alt="lesson 6" onclick="redirectWebpage(2004)">Right Hand Characters</button>
+        <button class="main_menu_btns" alt="lesson 7" onclick="redirectWebpage(2005)">Uppercase Characters</button>
+        <button class="main_menu_btns" alt="lesson 8" onclick="redirectWebpage(2006)">Numbers</button>
+        <button class="main_menu_btns" alt="lesson 9" onclick="redirectWebpage(2007)">Punctuation</button>
+        <button class="main_menu_btns" alt="lesson 10" onclick="redirectWebpage(3000)">Top Row Words</button>
+        <button class="main_menu_btns" alt="lesson 11" onclick="redirectWebpage(3001)">Home Row Words</button>
+        <button class="main_menu_btns" alt="lesson 12" onclick="redirectWebpage(3002)">Left Hand Words</button>
+        <button class="main_menu_btns" alt="lesson 12" onclick="redirectWebpage(3003)">Right Hand Words</button>
+        <button class="main_menu_btns" alt="lesson 12" onclick="redirectWebpage(3004)">All Words</button>
+    </div>
+    
+    <!-- <h1>Speech <br>Recognition</h1>
+    <p>Available in Chrome only</p> -->
+    <div class = "container">
+        <!-- <div class = "texts">
+            <p>Hello World</p>
+        </div> -->
+    </div>
+   
+</body>
+</html>
