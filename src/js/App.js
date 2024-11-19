@@ -18,7 +18,7 @@ const LESSONS = new Map([
   ["Lesson 3", ["s l", "ss ll", "sl sl ls ls"]],
   ["Lesson 4", ["a ;", "aa ;;", "a; a; ;a ;a"]],
   ["Lesson 5", ["g h", "gg hh", "gh gh hg hg"]],
-  ["Lesson 6", ["home words"]], //not complete
+  ["Lesson 6", ["hall ask slash gas dash flag saga gals all ash gala had flash flask lash sad fall alas klad glass has salad"]],
   ["Lesson 7", ["r u", "rr uu", "ru ru ur ur"]],
   ["Lesson 8", ["e i", "ee ii", "ei ei ie ie"]],
   ["Lesson 9", ["w o", "ww oo", "wo wo ow ow"]],
