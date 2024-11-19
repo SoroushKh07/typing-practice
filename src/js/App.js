@@ -50,6 +50,7 @@ const LESSONS = new Map([
  
 ])
 var lessonNum = parseInt(localStorage.getItem("lessonNumber"));
+lessonNum = 3000;
 var lessonPhase = 0;//changes as lesson progresses
 var lessonCompleted = false;
 var wordCount = 10;
@@ -104,7 +105,7 @@ var rightWordList = [
 "noon", "noun", "plum", "pool", "poll", 
 "pull", "loom", "lion", "mile", "mill", "monk"
 ];
-let startDate = new Date();
+let startDate;
 
 
 class TypingPractice {
@@ -173,13 +174,14 @@ class TypingPractice {
         }
         if (lessonCompleted) {
           //location.href = lessons Page
-          console.log("test");
+          speak("test");
+          
           lessonCompleted = false;
         }
         this.backup();
         if(this.typed.length == 0){
           //TEXT TO SPEECH
-          console.log(this.given.split(" ")[0]);
+          speak(this.given.split(" ")[0]);
         }
       } else if(e.keyCode == 32 && lessonCompleted && lessonNum<1000){
         lessonNum++;
@@ -279,9 +281,10 @@ class TypingPractice {
         break;
     }
     //SAYS THINGS THAT EXPLAIN LESSON, FOR EXAMPLE: F AND J ARE THE THINGS WITH THE UNDERLINE THINGS
-    console.log(initialMessage);
+    speak(initialMessage);
+    speak('test');
     //SAYS FIRST WORD
-    console.log(words[0].split(" ")[0]);
+    speak(words[0].split(" ")[0]);
     this.given = words.join(" ");
     this.typed = "";
   }
@@ -494,11 +497,11 @@ class TypingPractice {
       }
       if(i == totalTyped.length-1 && totalGiven[i] != totalTyped[i]){
         //text to speech
-        console.log("Wrong")
+        speak("Wrong")
       }
       if(lessonNum < 1000){
         if (corrects == LESSONS.get(`Lesson ${lessonNum}`)[lessonPhase].length) {
-          console.log("nice!")
+          speak("nice!")
           this.nextPhase();
         }
       }
@@ -508,16 +511,16 @@ class TypingPractice {
         let accuracy = corrects/totalTyped.length
         let wpm = Math.floor((wordCount*accuracy)/(finalDate/60000))
         //SAY WPM AND ACCURACY
-        console.log(wpm);
-        console.log(accuracy*100 + "%");
+        speak(wpm);
+        speak(accuracy*100 + "%");
         //exit practice
         this.nextPhase();
       }
     });
     if(corrects!=totalTyped.length && lessonNum < 1000 && this.typed.length>1){
       //text to speech
-      console.log(corrects + " " + totalTyped)
-      console.log("you still have a mistake!");
+      speak(corrects + " " + totalTyped)
+      speak("you still have a mistake!");
     }
     const wordProgressGiven = this.given.split(" ");
     const wordProgressTyped = this.typed.split(" ");
@@ -532,7 +535,7 @@ class TypingPractice {
     }
     if(totalGiven[totalTyped.length] == " "){
       //TEXT TO SPEECH THE WORD
-      console.log(wordArray[totalTyped.length+1])
+      speak(wordArray[totalTyped.length+1])
     }
     
 
@@ -593,7 +596,7 @@ class TypingPractice {
     if(lessonNum<1000){
       if (LESSONS.get(`Lesson ${lessonNum}`).length-1 <= lessonPhase) {
         //text to speech
-        console.log("press space to go to the next lesson, press backspace to exit")
+        speak("press space to go to the next lesson, press backspace to exit")
         lessonCompleted = true;
       }
       else {
@@ -604,7 +607,7 @@ class TypingPractice {
       }
     }
     else if(lessonNum>=1000){
-      console.log("press space to go to restart, press backspace to exit")
+      speak("press space to go to restart, press backspace to exit")
       lessonCompleted = true;
     }
 
@@ -799,7 +802,7 @@ const TypedInput = document.getElementById('typedIn')
 
 const keys = ['`', '1', '2', '3', '4', '5','6','7', '8', '9',  '0', '-', '=', 'Backspace', 'q', 'w', 'e', 'r', 't', 'y', 'u', 'i', 'o', 'p', '[', ']', '|', 'a', 's', 'd', 'f', 'g', 'h', 'j', 'k', 'l', ';', "'", '"', 'z', 'x', 'c', 'v', 'b', 'n', 'm', ',', '.', '/', '*', '+', '!', '@', '#', '$', '%', '^', '&', '(', ')', '_', '{', '}', '\\', ':', '<', '>', '?', '~', ' ', 'Q', 'W', 'E', 'R', 'T', 'Y', 'U','I','O', 'P', 'A', 'S', 'D', 'F', 'G', 'G', 'H', 'J', 'K', 'L', 'Z', 'X', 'C', 'V', 'B', 'N', 'M']
 
-var soundBase = ['Grave', 'One', 'Two', 'Three', 'Four', 'Five','Six','Seven', 'Eight', 'Nine',  'Zero', 'Hyphen', 'Equal', 'Backspace', 'q', 'w', 'e', 'r', 't', 'y', 'u', 'i', 'o', 'p', 'Open Bracket', 'Close Bracket', 'Pipe', 'a', 's', 'd', 'f', 'g', 'h', 'j', 'k', 'l', 'Semicolon', "Single Quote", 'Double  Quote', 'z', 'x', 'c', 'v', 'b', 'n', 'm', 'Comma', 'Dot', 'Slash', 'Asterisk', 'Addition', 'Exclamation', 'At', 'Pound', 'Dollar Sign', 'Percent', 'Carat', 'And', 'Left Bracket', 'Right Bracket', 'Underscore', 'Open Brace', 'Close Brace', 'Backslash', 'Colon', 'Less Than', 'Greater Than', 'Question Mark', 'Tilde', 'Spacebar', 'Q', 'W', 'E', 'R', 'T', 'Y', 'U','I','O', 'P', 'A', 'S', 'D', 'F', 'G', 'G', 'H', 'J', 'K', 'L', 'Z', 'X', 'C', 'V', 'B', 'N', 'M']
+var soundBase = ['Grave', 'One', 'Two', 'Three', 'Four', 'Five','Six','Seven', 'Eight', 'Nine',  'Zero', 'Hyphen', 'Equal', 'Backspace', 'q', 'w', 'e', 'r', 't', 'y', 'u', 'i', 'o', 'p', 'Open Bracket', 'Close Bracket', 'Pipe', 'a', 's', 'd', 'f', 'g', 'h', 'j', 'k', 'l', 'Semicolon', "Single Quote", 'Double  Quote', 'z', 'x', 'c', 'v', 'b', 'n', 'm', 'Comma', 'Dot', 'Slash', 'Asterisk', 'Addition', 'Exclamation', 'At', 'Pound', 'Dollar Sign', 'Percent', 'Carat', 'And', 'Left Bracket', 'Right Bracket', 'Underscore', 'Open Brace', 'Close Brace', 'Backslash', 'Colon', 'Less Than', 'Greater Than', 'Question Mark', 'Tilde', 'Space bar', 'Q', 'W', 'E', 'R', 'T', 'Y', 'U','I','O', 'P', 'A', 'S', 'D', 'F', 'G', 'G', 'H', 'J', 'K', 'L', 'Z', 'X', 'C', 'V', 'B', 'N', 'M']
 
 if ('speechSynthesis' in window) {
 
@@ -929,3 +932,14 @@ if ('speechSynthesis' in window) {
 
     alert("Sorry, your browser doesn't support text to speech!");
 }}
+function speak(text) {
+  if ('speechSynthesis' in window) {
+    const speech = new SpeechSynthesisUtterance(text); // Use the text parameter
+    speech.lang = 'en-US'; // Set language
+    speech.pitch = 1; // Voice pitch (1 = normal)
+    speech.rate = 2; // Voice rate (1 = normal)
+    window.speechSynthesis.speak(speech); // Speak the text
+  } else {
+    console.error('Sorry, your browser does not support text-to-speech.');
+  }
+}

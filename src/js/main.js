@@ -21,6 +21,11 @@ recognition.addEventListener('result', (e) => {
 
     if (e.results[0].isFinal){
 
+        if (text.includes('lesson 1')){
+            redirectWebpage(1);
+            alert("redirecting to lesson 1");
+        }
+
         if (text.includes('open')){
             p = document.createElement('p');
             // p.classList.add('replay');
