@@ -9,27 +9,44 @@ const LEFT_HAND = "qwertasdfgzxcvb"
 const RIGHT_HAND = "jkl;uiopm,./nhy"
 const LETTERS_UPPER = LETTERS_LOWER.toUpperCase();
 const DIGITS = "0123456789";
-const PUNCTUATION = "!@#$%^&*()_+-=[]{};':\",./<>?";
+const PUNCTUATION = "`~!@#$%^&*()_+-=[]{};':\",./<>?";
 const LESSONS = new Map([
+  //Lessons
   ["Lesson 0", ["xcghasdjlcgysjlcgsjcygsljdcsdlyfgasdlycgslycgsdycs", " "]],
   ["Lesson 1", ["f j", "ff jj", "fj fj jf jf"]],
   ["Lesson 2", ["d k", "dd kk", "dk dk kd kd"]],
   ["Lesson 3", ["s l", "ss ll", "sl sl ls ls"]],
   ["Lesson 4", ["a ;", "aa ;;", "a; a; ;a ;a"]],
-  ["lesson 1000", ["dad"]],
+  ["Lesson 5", ["g h", "gg hh", "gh gh hg hg"]],
+  ["Lesson 6", ["home words"]], //not complete
+  ["Lesson 7", ["r u", "rr uu", "ru ru ur ur"]],
+  ["Lesson 8", ["e i", "ee ii", "ei ei ie ie"]],
+  ["Lesson 9", ["w o", "ww oo", "wo wo ow ow"]],
+  ["Lesson 10", ["q p", "qq pp", "qp qp pq pq"]],
+  ["Lesson 11", ["t y", "tt yy", "ty ty yt yt"]],
+  ["Lesson 12", ["top words"]], //not complete
+  ["Lesson 13", ["r u", "rr uu", "ru ru ur ur"]],
+  ["Lesson 14", ["e i", "ee ii", "ei ei ie ie"]],
+  ["Lesson 15", ["w o", "ww oo", "wo wo ow ow"]],
+  ["Lesson 16", ["q p", "qq pp", "qp qp pq pq"]],
+  ["Lesson 17", ["t y", "tt yy", "ty ty yt yt"]],
+  ["Lesson 18", ["bottom words"]], //not complete (side note: bottom words can include home and top row vowels)
+
+  //Practice
+  ["lesson 1000", ["dad"]], //not complete
   ["lesson 2000", ["TOP_ROW"]],
   ["lesson 2001", ["HOME_ROW"]],
   ["lesson 2002", ["BOTTOM_ROW"]],
   ["lesson 2003", ["LEFT_HAND"]],
   ["lesson 2004", ["RIGHT_HAND"]],
-  ["lesson 2005", ["UPPER"]],
+  ["lesson 2005", ["LETTERS_UPPER"]],
   ["lesson 2006", ["DIGITS"]],
   ["lesson 2007", ["PUNCTUATION"]],
-  ["lesson 3000", ["All words"]],
-  ["lesson 3001", ["top words"]],
-  ["lesson 3002", ["home words"]],
-  ["lesson 3003", ["left words"]],
-  ["lesson 3004", ["right words"]]
+  ["lesson 3000", ["top words"]], //not complete
+  ["lesson 3001", ["home words"]], //not complete
+  ["lesson 3002", ["left words"]], //not complete
+  ["lesson 3003", ["right words"]] //not complete
+  ["lesson 3004", ["All words"]], //not complete
  
 ])
 var lessonNum = parseInt(localStorage.getItem("lessonNumber"));
@@ -155,9 +172,10 @@ class TypingPractice {
           this.nextPhase();
         }
         if (lessonCompleted) {
-          //location.href = lessons Page
-          console.log("test");
+          location.href = "../html/lessons.html";
           lessonCompleted = false;
+          }else{
+          this.backup();
         }
         this.backup();
         if(this.typed.length == 0){
