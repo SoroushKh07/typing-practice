@@ -10,6 +10,7 @@ const RIGHT_HAND = "jkl;uiopm,./nhy"
 const LETTERS_UPPER = LETTERS_LOWER.toUpperCase();
 const DIGITS = "0123456789";
 const PUNCTUATION = "`~!@#$%^&*()_+-=[]{};':\",./<>?";
+const wordLessons = [6,12,18,3000,3001,3002,3003,3004]
 const LESSONS = new Map([
   //Lessons
   ["Lesson 0", ["xcghasdjlcgysjlcgsjcygsljdcsdlyfgasdlycgslycgsdycs", " "]],
@@ -45,8 +46,8 @@ const LESSONS = new Map([
   ["lesson 3000", ["top words"]], //not complete
   ["lesson 3001", ["home words"]], //not complete
   ["lesson 3002", ["left words"]], //not complete
-  ["lesson 3003", ["right words"]] //not complete
-  ["lesson 3004", ["All words"]], //not complete
+  ["lesson 3003", ["right words"]], //not complete
+  ["lesson 3004", ["All words"]] //not complete
  
 ])
 var lessonNum = parseInt(localStorage.getItem("lessonNumber"));
@@ -104,7 +105,7 @@ var rightWordList = [
 "noon", "noun", "plum", "pool", "poll", 
 "pull", "loom", "lion", "mile", "mill", "monk"
 ];
-let startDate = new Date();
+let startDate;
 
 
 class TypingPractice {
@@ -180,7 +181,22 @@ class TypingPractice {
         this.backup();
         if(this.typed.length == 0){
           //TEXT TO SPEECH
+          
           console.log(this.given.split(" ")[0]);
+          if(wordLessons.indexOf(lessonNum)>0){
+            console.log(this.given.split(" ")[0])
+          }
+          else{
+            let tempWord = this.given.split(" ")[0].split("")
+            let tempSpeaker = "";
+            for(let i = 0; i<tempWord.length; i++){
+              tempSpeaker += tempWord[i];
+              if(i+1!=tempWord.length){
+                tempSpeaker+= " ";
+              }
+            }
+            console.log(tempSpeaker);
+          }
         }
       } else if(e.keyCode == 32 && lessonCompleted && lessonNum<1000){
         lessonNum++;
@@ -282,7 +298,20 @@ class TypingPractice {
     //SAYS THINGS THAT EXPLAIN LESSON, FOR EXAMPLE: F AND J ARE THE THINGS WITH THE UNDERLINE THINGS
     console.log(initialMessage);
     //SAYS FIRST WORD
-    console.log(words[0].split(" ")[0]);
+    if(wordLessons.indexOf(lessonNum)>0){
+      console.log(words[0].split(" ")[0])
+    }
+    else{
+      let tempWord = words[0].split(" ")[0].split("")
+      let tempSpeaker = "";
+      for(let i = 0; i<tempWord.length; i++){
+        tempSpeaker += tempWord[i];
+        if(i+1!=tempWord.length){
+          tempSpeaker+= " ";
+        }
+      }
+      console.log(tempSpeaker);
+    }
     this.given = words.join(" ");
     this.typed = "";
   }
@@ -517,7 +546,6 @@ class TypingPractice {
     });
     if(corrects!=totalTyped.length && lessonNum < 1000 && this.typed.length>1){
       //text to speech
-      console.log(corrects + " " + totalTyped)
       console.log("you still have a mistake!");
     }
     const wordProgressGiven = this.given.split(" ");
@@ -533,7 +561,20 @@ class TypingPractice {
     }
     if(totalGiven[totalTyped.length] == " "){
       //TEXT TO SPEECH THE WORD
-      console.log(wordArray[totalTyped.length+1])
+      if(wordLessons.indexOf(lessonNum)>0){
+        console.log(wordArray[totalTyped.length+1])
+      }
+      else{
+        let tempWord = wordArray[totalTyped.length+1].split("")
+        let tempSpeaker = "";
+        for(let i = 0; i<tempWord.length; i++){
+          tempSpeaker += tempWord[i];
+          if(i+1!=tempWord.length){
+            tempSpeaker+= " ";
+          }
+        }
+        console.log(tempSpeaker);
+      }
     }
     
 
