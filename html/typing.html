@@ -8,60 +8,92 @@
   <link rel="preload" as="font" href="src/assets/fonts/iosevka-regular.subset.woff2" type="font/woff2" crossorigin="anonymous"/>
   <link rel="preload" as="font" href="src/assets/fonts/iosevka-bold.subset.woff2" type="font/woff2" crossorigin="anonymous"/>
   <link rel="preload" as="font" href="src/assets/fonts/iosevka-italic.subset.woff2" type="font/woff2" crossorigin="anonymous"/>
+  <link rel="stylesheet" type="text/css" href="../src/css/general_layout.css" media="all"/>
   <link rel="stylesheet" type="text/css" href="../src/css/style.css" media="all"/>
+  <link rel="stylesheet" type="text/css" href="../src/css/navbar.css" media="all"/>
   <link rel="shortcut icon" type="image/png" href="assets/images/favicon.png" />
+
+  <!-- Google icons -->
+  <link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons"/>
+  <!-- Google fonts -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Geist+Mono:wght@100..900&family=Noto+Sans:ital,wght@0,100..900;1,100..900&display=swap" rel="stylesheet">
+  <!-- Stylesheets -->
+  <link rel="stylesheet" href="/src/css/general_layout.css">
+  <link rel="stylesheet" href="/src/css/navbar.css">
 </head>
 <body>
+  <!-- Navbar -->
+  <nav>
+    <ul>
+        <!-- Home (main menu) -->
+        <li class="active">
+            <a href="../index.html"><i class="material-icons" id="homeIcon" style="text-align: left; font-size: 40px; color: #FFFFFF;">home</i></a>
+        </li>
+        <!-- Settings -->
+        <li>
+            <a href="#settings"><i class="material-icons" id="settingsIcon" style="text-align: left; font-size: 40px; color: #FFFFFF">settings</i></a>
+        </li>
+        <!-- TTS (when clicked on, TTS turns off and icon changes to mute symbol)-->
+        <li>
+            <i class="material-icons" id="TTSIcon" style="text-align: left; font-size: 40px; color: #FFFFFF" onclick="muteTTS()">volume_up</i>
+        </li>
+        <!-- Account (dropdown contains logout button)-->
+        <div class="topnav-right">
+            <li>
+                <a href="#"><i class="material-icons" id="userIcon" style="text-align: right; font-size: 40px; color: #FFFFFF;">account_circle</i><i class="material-icons" style="text-align: right; font-size: 40px; color: #FFFFFF;">arrow_drop_down</i></a>
+                <ul class="dropdown">
+                    <li><a href="#account">My Account</a></li>
+                    <li><a href="#opening_page">Logout</a></li>
+                </ul>
+            </li>
+        </div>
+      </ul>
+  </nav>
+
+  <!-- Positioning of buttons -->
   <svg style="display: none">
     <defs>
-      <symbol id="github-mark" viewBox="0 0 12 12"><path d="M6 .395a5.746 5.746 0 00-1.817 11.2c.288.052.393-.125.393-.277 0-.137-.005-.498-.008-.978-1.599.348-1.936-.77-1.936-.77-.261-.664-.638-.84-.638-.84-.522-.357.04-.35.04-.35.576.041.88.592.88.592.512.878 1.345.625 1.672.478.052-.371.2-.625.365-.768-1.276-.145-2.618-.639-2.618-2.84 0-.628.224-1.14.592-1.543-.06-.145-.256-.73.056-1.52 0 0 .483-.155 1.58.589.459-.128.95-.191 1.44-.194.487.003.979.066 1.438.194 1.097-.744 1.578-.59 1.578-.59.314.792.117 1.376.058 1.521.368.402.59.915.59 1.542 0 2.208-1.343 2.694-2.623 2.836.206.178.39.528.39 1.064 0 .768-.007 1.388-.007 1.577 0 .153.103.332.395.276A5.749 5.749 0 006 .395"/></symbol>
-      <symbol id="plus" viewBox="0 0 11 11"><path d="M0 4 h4 v-4 h3 v4 h4 v3 h-4 v4 h-3 v-4 h-4z"/></symbol>
-      <symbol id="minus" viewBox="0 0 11 11"><path d="M0 4 h11 v3 h-11z"/></symbol>
+      <symbol id="plus" style="color: #FFFFFF; background-color:#16325B;" viewBox="0 0 11 11"><path d="M0 4 h4 v-4 h3 v4 h4 v3 h-4 v4 h-3 v-4 h-4z"/></symbol>
+      <symbol id="minus" style="color: #FFFFFF; background-color:#16325B;" viewBox="0 0 11 11"><path d="M0 4 h11 v3 h-11z"/></symbol>
       <symbol id="play" viewBox="0 0 11 11"><path d="M2 0 L11 5.5 L2 11Z"/></symbol>
       <symbol id="pause" viewBox="0 0 11 11"><path d="M1 0 h3 v11 h-3z M7 0 h3 v11 h-3z"/></symbol>
     </defs>
   </svg>
 
-  <div id="github-link">
-    <a href="https://github.com/AkemSandhu/typing-practice">
-      <svg><use xlink:href="#github-mark"></use></svg>
-    </a>
-  </div>
-  
-  <div id="root">
+  <!-- Title -->
+  <div id="root" class="container">
     <header>
-      <h1>Typing Practice</h1>
+      <h1 style="font-size: 5rem; margin-bottom: 0rem;">Typing Practice</h1>
     </header>
 
-    <section id="welcome">
-      <p>temp <span class="space-out">temp</span>, temp <a href="" target="_blank"><em>temp</em></a> temp
-
-      <div>
-        <strong>Tip:</strong> Practicing with a 
-
-        <div id="metronome" class="off">
-          <button class="toggle">
-            <svg class="play"><use xlink:href="#play"/></svg>
-            <svg class="pause"><use xlink:href="#pause"/></svg>
-          </button>
-          <span>metronome</span>
-          <button class="slower"><svg><use xlink:href="#minus"/></svg></button>
-          <button class="faster"><svg><use xlink:href="#plus"/></svg></button>
-        </div>
-
-        can be a good way to improve consistency.
+    <!-- Tip: Practicing with a metronome can be a good way to improve consistency -->
+      <div style="margin-top: 0rem;">
+        <h3><strong>Tip: </strong> Practicing with a 
+          <div id="metronome" class="off">
+            <button class="toggle" style="color: #FFFFFF">
+              <svg class="play"><use xlink:href="#play"/></svg>
+              <svg class="pause"><use xlink:href="#pause"/></svg>
+            </button>
+            <span style="color: #FFFFFF">metronome</span>
+            <button class="slower"><svg><use xlink:href="#minus"/></svg></button>
+            <button class="faster"><svg><use xlink:href="#plus"/></svg></button>
+          </div>
+          can be a good way to improve consistency.
+        </h3>
       </div>
-    </section>
     
-    <div id="practice">
-      <section class="given"></section>
+    <!-- Practice box -->
+    <div id="practice" style="margin-top: 2rem;">
+      <section class="given" style="background-color: #16325B; color: #FFFFFF;"></section>
       <section class="typed">
-        <input id = 'typedIn' autocomplete="off" autocorrect="off" autocapitalize="off" spellcheck="false" />
+        <input id = 'typedIn' autocomplete="off" autocorrect="off" autocapitalize="off" spellcheck="false"  />
       </section>
-      <div class="weights">
-        <div class="lettersUpper">
-          <div class="chars">A&ndash;Z</div>
-          <div class="weight">
+      <div class="weights" style="font-family: 'Noto Sans', sans-serif; font-size: 1.25rem;">
+        <div class="lettersUpper" style="background-color: #16325B; color: #FFFFFF;">
+          <div class="chars" >A&ndash;Z</div>
+          <div class="weight" style="background-color: #16325B; color: #FFFFFF; border-color: #FFFFFF;">
             <span>1</span>
             <div class="controls">
               <button class="incr"><svg><use xlink:href="#plus"/></svg></button>
@@ -70,9 +102,9 @@
           </div>
         </div>
 
-        <div class="lettersLower">
+        <div class="lettersLower" style="background-color: #16325B; color: #FFFFFF;">
           <div class="chars">a&ndash;z</div>
-          <div class="weight">
+          <div class="weight" style="background-color: #16325B; color: #FFFFFF; border-color: #FFFFFF;">
             <span>1</span>
             <div class="controls">
               <button class="incr"><svg><use xlink:href="#plus"/></svg></button>
@@ -81,9 +113,9 @@
           </div>
         </div>
 
-        <div class="digits">
+        <div class="digits" style="background-color: #16325B; color: #FFFFFF;">
           <div class="chars">0&ndash;9</div>
-          <div class="weight">
+          <div class="weight" style="background-color: #16325B; color: #FFFFFF; border-color: #FFFFFF;">
             <span>1</span>
             <div class="controls">
               <button class="incr"><svg><use xlink:href="#plus"/></svg></button>
@@ -92,9 +124,9 @@
           </div>
         </div>
 
-        <div class="punctuation">
+        <div class="punctuation" style="background-color: #16325B; color: #FFFFFF;">
           <div class="chars">!@#&hellip;</div>
-          <div class="weight">
+          <div class="weight" style="background-color: #16325B; color: #FFFFFF; border-color: #FFFFFF;">
             <span>1</span>
             <div class="controls">
               <button class="incr"><svg><use xlink:href="#plus"/></svg></button>
@@ -106,14 +138,16 @@
         <svg class="lines"></svg>
       </div>
 
-      <p>You have typed <span class="count">0</span> characters so far.</p>
+      <h3>You have typed <span class="count" style="color: #16325B;">0</span> characters so far.</h3>
     </div>
-
-    <footer>
-      <div>2024 Group 2 (the better group)</div>
-    </footer>
   </div>
-
   <script type="text/javascript" src="../src/js/app.js"></script>
 </body>
+
+<!-- Footer -->
+<div class="footer" style="margin-left: 0rem; margin-right: 0rem; margin-bottom: 0rem; bottom: 0; width: 100%;">
+  <hr>
+  <h6>Bat Type</h6>
+  <p>Copyright © 2024 Group 2 (the better group)</p>
+</div>
 </html>

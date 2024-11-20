@@ -2,10 +2,6 @@ function redirectWebpage(num) {
     window.location = "typing.html";
     localStorage.setItem("lessonNumber", num.toString());
 }
-
-
-// const texts = document.querySelector('.texts');
-
 window.SpeechRecognition = window.SpeechRecognition || window.webkitSpeechRecognition;
 
 const recognition = new window.SpeechRecognition();
@@ -17,7 +13,6 @@ recognition.addEventListener('result', (e) => {
     const text = Array.from(e.results).map(result => result[0]).map(result => result.transcript).join('');
 
     p.innerText = text;
-    // texts.appendChild(p);
 
     if (e.results[0].isFinal){
 
@@ -40,10 +35,10 @@ recognition.addEventListener('result', (e) => {
             redirectWebpage(6);
         }
         if (text.includes('back')){
-            alert("going back");
+            window.location = "../index.html";
         }
         if (text.includes('home')){
-            alert("going home");
+            window.location = "../index.html";
         }
     }
 });
