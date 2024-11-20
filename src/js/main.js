@@ -40,6 +40,10 @@ recognition.addEventListener('result', (e) => {
         if (text.includes('home')){
             window.location = "../index.html";
         }
+        if (text.includes('help')){
+            // alert(text);
+            speak('Welcome to the level selection screen. There are 10 levels at the moment. Say its number to open it');
+        }
     }
 });
 
@@ -48,3 +52,16 @@ recognition.addEventListener('end', () => {
 })
 
 recognition.start();
+
+
+function speak(text) {
+    if('speechSynthesis' in window) {
+      const speech = new SpeechSynthesisUtterance(text); // Use the text parameter
+      speech.lang = 'en-US'; // Set language
+      speech.pitch = 1; // Voice pitch (1 = normal)
+      speech.rate = 2; // Voice rate (1 = normal)
+      window.speechSynthesis.speak(speech); // Speak the text
+    } else {
+      console.error('Sorry, your browser does not support text-to-speech.');
+    } 
+}
