@@ -34,7 +34,7 @@ const LESSONS = new Map([
   ["Lesson 18", ["bottom words"]], //not complete (side note: bottom words can include home and top row vowels)
 
   //Practice
-  ["lesson 1000", ["dad"]], //not complete
+  ["lesson 1000", ["dad"]],
   ["lesson 2000", ["TOP_ROW"]],
   ["lesson 2001", ["HOME_ROW"]],
   ["lesson 2002", ["BOTTOM_ROW"]],
@@ -43,11 +43,11 @@ const LESSONS = new Map([
   ["lesson 2005", ["LETTERS_UPPER"]],
   ["lesson 2006", ["DIGITS"]],
   ["lesson 2007", ["PUNCTUATION"]],
-  ["lesson 3000", ["top words"]], //not complete
-  ["lesson 3001", ["home words"]], //not complete
-  ["lesson 3002", ["left words"]], //not complete
-  ["lesson 3003", ["right words"]], //not complete
-  ["lesson 3004", ["All words"]] //not complete
+  ["lesson 3000", ["top words"]],
+  ["lesson 3001", ["home words"]],
+  ["lesson 3002", ["left words"]], 
+  ["lesson 3003", ["right words"]], 
+  ["lesson 3004", ["All words"]] 
  
 ])
 var lessonNum = parseInt(localStorage.getItem("lessonNumber"));
@@ -173,16 +173,20 @@ class TypingPractice {
           this.nextPhase();
         }
         if (lessonCompleted) {
+          if(lessonNum<1000){
           location.href = "../html/lessons.html";
+          }
+          else if(lessonNum!=3004){
+            location.href = "../html/practice.html";
+          }
+          else{
+            location.href = "../index.html";
+          }
           lessonCompleted = false;
-          }else{
-          this.backup();
         }
         this.backup();
         if(this.typed.length == 0){
           //TEXT TO SPEECH
-          
-          console.log(this.given.split(" ")[0]);
           if(wordLessons.indexOf(lessonNum)>0){
             console.log(this.given.split(" ")[0])
           }
@@ -298,20 +302,21 @@ class TypingPractice {
     //SAYS THINGS THAT EXPLAIN LESSON, FOR EXAMPLE: F AND J ARE THE THINGS WITH THE UNDERLINE THINGS
     console.log(initialMessage);
     //SAYS FIRST WORD
+    let tempSpeaker = "";
     if(wordLessons.indexOf(lessonNum)>0){
-      console.log(words[0].split(" ")[0])
+       tempSpeaker = words[0].split(" ")[0];
     }
     else{
       let tempWord = words[0].split(" ")[0].split("")
-      let tempSpeaker = "";
+      
       for(let i = 0; i<tempWord.length; i++){
         tempSpeaker += tempWord[i];
         if(i+1!=tempWord.length){
           tempSpeaker+= " ";
         }
       }
-      console.log(tempSpeaker);
     }
+    console.log(initialMessage + "   " + tempSpeaker);
     this.given = words.join(" ");
     this.typed = "";
   }
@@ -408,7 +413,7 @@ class TypingPractice {
     const charset = this._makeCharset();
    
     // return [...new Array(length)].map(() => charset + "
-    if(lessonNum >= 1000 && lessonNum != 3000){
+    if(lessonNum >= 1000 && lessonNum <3000){
       let typingString = ""
       for(let i = 0; i < wordCount; i++ ){
         typingString += [...new Array(length)].map(() => randomChoice(charset)).join("")
@@ -421,7 +426,7 @@ class TypingPractice {
     else if (lessonNum >= 3000){
       let typingString = ""
       for(let i = 0; i < wordCount; i++ ){
-        typingString += charset[Math.floor(Math.random()*wordList.length)];
+        typingString += charset[Math.floor(Math.random()*charset.length)];
         if(i!=wordCount-1){
           typingString+=" "
         }
@@ -518,13 +523,14 @@ class TypingPractice {
     const totalTyped = this.typed.slice("");
 
     let corrects = 0;
+    let wronger = "";
     [...totalTyped].forEach((c, i) => {
       if (totalGiven[i] == c) {
         corrects++;
       }
       if(i == totalTyped.length-1 && totalGiven[i] != totalTyped[i]){
         //text to speech
-        console.log("Wrong")
+        wronger += "Wrong"
       }
       if(lessonNum < 1000){
         if (corrects == LESSONS.get(`Lesson ${lessonNum}`)[lessonPhase].length) {
@@ -546,7 +552,10 @@ class TypingPractice {
     });
     if(corrects!=totalTyped.length && lessonNum < 1000 && this.typed.length>1){
       //text to speech
-      console.log("you still have a mistake!");
+      wronger += "you still have a mistake!"
+    }
+    if(wronger!= ""){
+      console.log(wronger);
     }
     const wordProgressGiven = this.given.split(" ");
     const wordProgressTyped = this.typed.split(" ");
