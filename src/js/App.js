@@ -25,7 +25,7 @@ const LESSONS = new Map([
   ["Lesson 9", ["w o", "ww oo", "wo wo ow ow"]],
   ["Lesson 10", ["q p", "qq pp", "qp qp pq pq"]],
   ["Lesson 11", ["t y", "tt yy", "ty ty yt yt"]],
-  ["Lesson 12", ["top words"]], //not complete
+  ["Lesson 12", ["poetry wipeout tie pity your quite equip trope euro twirp our quote write wrote tire power trio pie you route"]],
   ["Lesson 13", ["r u", "rr uu", "ru ru ur ur"]],
   ["Lesson 14", ["e i", "ee ii", "ei ei ie ie"]],
   ["Lesson 15", ["w o", "ww oo", "wo wo ow ow"]],
