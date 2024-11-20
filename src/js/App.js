@@ -321,13 +321,13 @@ class TypingPractice {
     const svg = this.dom.weights.querySelector(".lines");
     const x1 = Math.round(svg.clientWidth / 2) - 0.5;
     const y1 = -0.5;
-    const bg = "#fed";
-    const stroke = "#dfcfbf";
-    const strokeWidth = 2;
+    const bg = "#16325B";
+    const stroke = "#16325B";
+    const strokeWidth = 3;
 
 
     const makePath = (x1, y1, x2, y2) => {
-      const radius = 12;
+      const radius = 20;
       const path = makeConnectingPath(x1, y1, x2, y2, radius);
       path.setAttributeNS(null, "stroke", stroke);
       path.setAttributeNS(null, "stroke-width", strokeWidth * 0.75);
