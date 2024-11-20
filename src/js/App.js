@@ -31,8 +31,12 @@ const LESSONS = new Map([
   ["Lesson 15", ["w o", "ww oo", "wo wo ow ow"]],
   ["Lesson 16", ["q p", "qq pp", "qp qp pq pq"]],
   ["Lesson 17", ["t y", "tt yy", "ty ty yt yt"]],
-  ["Lesson 18", ["cabin banjo bacon venom vocation combine men mankind ban can vaccine bin zen maven bum zebra mimic cabal balcony bazooka nexus"]], //not complete (side note: bottom words can include home and top row vowels)
-
+  ["Lesson 18", ["cabin banjo bacon venom vocation combine men mankind ban can vaccine bin zen maven bum zebra mimic cabal balcony bazooka nexus"]],
+  ["Lesson 35", ["4 7", "44 77", "47 47 74 74"]],
+  ["Lesson 36", ["3 8", "33 88", "38 38 83 83"]],
+  ["Lesson 37", ["2 9", "22 99", "29 29 92 92"]],
+  ["Lesson 35", ["1 0", "11 00", "10 10 01 01"]],
+  ["Lesson 35", ["5 6", "55 66", "56 56 65 65"]]
   //Practice
   ["lesson 1000", ["dad"]],
   ["lesson 2000", ["TOP_ROW"]],
