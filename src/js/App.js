@@ -846,146 +846,34 @@ practice.focus();
 
 //recognize and tts keys
 
-const TypedInput = document.getElementById('typedIn')
-
-var soundBase = ['Grave', 'One', 'Two', 'Three', 'Four', 'Five','Six','Seven', 'Eight', 'Nine',  'Zero', 'Hyphen', 'Equal', 'Backspace', 'q', 'w', 'e', 'r', 't', 'y', 'u', 'i', 'o', 'p', 'Open Bracket', 'Close Bracket', 'Pipe', 'a', 's', 'd', 'f', 'g', 'h', 'j', 'k', 'l', 'Semicolon', "Single Quote", 'Double  Quote', 'z', 'x', 'c', 'v', 'b', 'n', 'm', 'Comma', 'Dot', 'Slash', 'Asterisk', 'Addition', 'Exclamation', 'At', 'Pound', 'Dollar Sign', 'Percent', 'Carat', 'And', 'Left Bracket', 'Right Bracket', 'Underscore', 'Open Brace', 'Close Brace', 'Backslash', 'Colon', 'Less Than', 'Greater Than', 'Question Mark', 'Tilde', 'Spacebar', 'Q', 'W', 'E', 'R', 'T', 'Y', 'U','I','O', 'P', 'A', 'S', 'D', 'F', 'G', 'G', 'H', 'J', 'K', 'L', 'Z', 'X', 'C', 'V', 'B', 'N', 'M']
-const mode = document.getElementById('colorMode').value;
-localStorage.setItem('soundBase', soundBase);
-alert('SoundBase saved!');
-localStorage.setItem('Keys', Keys);
-alert('Keys saved!');
-
-var soundBase = ['Grave', 'One', 'Two', 'Three', 'Four', 'Five','Six','Seven', 'Eight', 'Nine',  'Zero', 'Hyphen', 'Equal', 'Backspace', 'q', 'w', 'e', 'r', 't', 'y', 'u', 'i', 'o', 'p', 'Open Bracket', 'Close Bracket', 'Pipe', 'a', 's', 'd', 'f', 'g', 'h', 'j', 'k', 'l', 'Semicolon', "Single Quote", 'Double  Quote', 'z', 'x', 'c', 'v', 'b', 'n', 'm', 'Comma', 'Dot', 'Slash', 'Asterisk', 'Addition', 'Exclamation', 'At', 'Pound', 'Dollar Sign', 'Percent', 'Carat', 'And', 'Left Bracket', 'Right Bracket', 'Underscore', 'Open Brace', 'Close Brace', 'Backslash', 'Colon', 'Less Than', 'Greater Than', 'Question Mark', 'Tilde', 'Spacebar', 'Q', 'W', 'E', 'R', 'T', 'Y', 'U','I','O', 'P', 'A', 'S', 'D', 'F', 'G', 'G', 'H', 'J', 'K', 'L', 'Z', 'X', 'C', 'V', 'B', 'N', 'M']
-
-
-if ('speechSynthesis' in window) {
-
-
-
-    TypedInput.addEventListener('keydown', e =>{
-
-      const speech = new SpeechSynthesisUtterance(soundBase[keys.indexOf(e.key)]);
-
-      speech.rate = 1.2
-
-      if (soundBase[keys.indexOf(e.key)]!='undefined'){
-
-        if (window.speechSynthesis.speaking) {
-
-          window.speechSynthesis.cancel();
-
-        }
-
-        
-
-        speech.lang = "en-US";
-
-        window.speechSynthesis.speak(speech);
-
-      }
-
-    })
-
-    // Speech Synthesis supported 🎉
-
-}else{
-
-    // Speech Synthesis Not Supported 😣
-
-    alert("Sorry, your browser doesn't support text to speech!");
-
-
-
-
-
-
-
-//recognize and tts keys
-
-
-
-const TypedInput = document.getElementById('typedIn')
-
-
+//const mode = document.getElementById('colorMode').value;
 
 const keys = ['`', '1', '2', '3', '4', '5','6','7', '8', '9',  '0', '-', '=', 'Backspace', 'q', 'w', 'e', 'r', 't', 'y', 'u', 'i', 'o', 'p', '[', ']', '|', 'a', 's', 'd', 'f', 'g', 'h', 'j', 'k', 'l', ';', "'", '"', 'z', 'x', 'c', 'v', 'b', 'n', 'm', ',', '.', '/', '*', '+', '!', '@', '#', '$', '%', '^', '&', '(', ')', '_', '{', '}', '\\', ':', '<', '>', '?', '~', ' ', 'Q', 'W', 'E', 'R', 'T', 'Y', 'U','I','O', 'P', 'A', 'S', 'D', 'F', 'G', 'G', 'H', 'J', 'K', 'L', 'Z', 'X', 'C', 'V', 'B', 'N', 'M']
-
-
-
 var soundBase = ['Grave', 'One', 'Two', 'Three', 'Four', 'Five','Six','Seven', 'Eight', 'Nine',  'Zero', 'Hyphen', 'Equal', 'Backspace', 'q', 'w', 'e', 'r', 't', 'y', 'u', 'i', 'o', 'p', 'Open Bracket', 'Close Bracket', 'Pipe', 'a', 's', 'd', 'f', 'g', 'h', 'j', 'k', 'l', 'Semicolon', "Single Quote", 'Double  Quote', 'z', 'x', 'c', 'v', 'b', 'n', 'm', 'Comma', 'Dot', 'Slash', 'Asterisk', 'Addition', 'Exclamation', 'At', 'Pound', 'Dollar Sign', 'Percent', 'Carat', 'And', 'Left Bracket', 'Right Bracket', 'Underscore', 'Open Brace', 'Close Brace', 'Backslash', 'Colon', 'Less Than', 'Greater Than', 'Question Mark', 'Tilde', 'Spacebar', 'Q', 'W', 'E', 'R', 'T', 'Y', 'U','I','O', 'P', 'A', 'S', 'D', 'F', 'G', 'G', 'H', 'J', 'K', 'L', 'Z', 'X', 'C', 'V', 'B', 'N', 'M']
-
-
-
+const TypedInput = document.getElementById('typedIn')
+localStorage.setItem('soundBase', soundBase);
+alert('SoundBase saved!');
+localStorage.setItem('Keys', keys);
+alert('Keys saved!');
 if ('speechSynthesis' in window) {
-
-
-
-
-
-
-
     TypedInput.addEventListener('keydown', e =>{
-
-
-
       const speech = new SpeechSynthesisUtterance(soundBase[keys.indexOf(e.key)]);
-
-
-
       speech.rate = 1.2
-
-
-
       if (soundBase[keys.indexOf(e.key)]!='undefined'){
-
-
-
         if (window.speechSynthesis.speaking) {
-
-
-
           window.speechSynthesis.cancel();
-
-
-
         }
-
-
-
-        
-
-
-
         speech.lang = "en-US";
-
-
-
         window.speechSynthesis.speak(speech);
-
-
-
+        console.log('speaking')
       }
-
-
-
     })
-
-
-
     // Speech Synthesis supported 🎉
-
-
-
 }else{
-
-
-
     // Speech Synthesis Not Supported 😣
-
-
-
     alert("Sorry, your browser doesn't support text to speech!");
-}}
+
+}
 
 function characterReplace(string){
   string = " " + string + " ";
